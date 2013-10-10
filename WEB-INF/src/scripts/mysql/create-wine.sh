@@ -1,0 +1,23 @@
+#!/bin/sh
+
+mysql -uroot -pJZworkb0x << FLAG
+set FOREIGN_KEY_CHECKS=0;
+
+CREATE DATABASE IF NOT EXISTS wineFrameWork;
+CREATE DATABASE IF NOT EXISTS wineShared;
+CREATE DATABASE IF NOT EXISTS wineBranch;
+
+GRANT ALL PRIVILEGES ON wineFrameWork.* TO 'mycoz'@'localhost' IDENTIFIED BY 'xmlpj0#' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON wineShared.* TO 'mycoz'@'localhost' IDENTIFIED BY 'xmlpj0#' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON wineBranch.* TO 'mycoz'@'localhost' IDENTIFIED BY 'xmlpj0#' WITH GRANT OPTION;
+
+#GRANT ALL PRIVILEGES ON wineFrameWork.* TO 'mycoz'@'%' IDENTIFIED BY 'xmlpj0#' WITH GRANT OPTION;
+#GRANT ALL PRIVILEGES ON wineShared.* TO 'mycoz'@'%' IDENTIFIED BY 'xmlpj0#' WITH GRANT OPTION;
+#GRANT ALL PRIVILEGES ON wineBranch.* TO 'mycoz'@'%' IDENTIFIED BY 'xmlpj0#' WITH GRANT OPTION;
+
+#DROP USER 'mycoz'@'localhost';
+#DROP USER 'mycoz'@'%';
+
+FLUSH PRIVILEGES;
+set FOREIGN_KEY_CHECKS=1;
+FLAG
