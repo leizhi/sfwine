@@ -358,7 +358,7 @@ public class SampleProductAction  extends BaseSupport {
 			sampleTasting.setSampleId(sampleProduct.getId());
 			
 			int icount = sampleTasting.count(tx.getConnection());
-			if(icount == 1){
+			if(icount < 1){
 				throw new Exception("没有可删除的评酒人");
 			}
 			
