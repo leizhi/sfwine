@@ -6,11 +6,11 @@
 <head>
 <title><fmt:message key="Card"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet">   
-<script type="text/javascript" src="jsp/js/util.js"></script>
-<link type="text/css" rel="stylesheet" href="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112" media="screen"/>
-<script type="text/javascript" src="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.js?random=20060118"></script>
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
+<script type="text/javascript" src="jsp/js/calendar.js"></script>
+<script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
+<script type="text/javascript" src="jsp/js/util.js"></script>
 </head>
 
 <body>
@@ -19,14 +19,14 @@
 	<jsp:include page="../incl/action.jsp">
 		<jsp:param name="type" value="find"/>
 		<jsp:param name="key" value="List"/>
-		<jsp:param name="action" value="WorkloadReport.do"/>
+		<jsp:param name="action" value="Report.do"/>
 		<jsp:param name="method" value="menu"/>
 	</jsp:include>
 	
 	<jsp:include page="../incl/action.jsp">
 		<jsp:param name="type" value="export"/>
 		<jsp:param name="key" value="List"/>
-		<jsp:param name="action" value="WorkloadReport.do"/>
+		<jsp:param name="action" value="Report.do"/>
 		<jsp:param name="aparams" value="reportName=${reportName }&reportType=xls"/>
 		<jsp:param name="method" value="export"/>
 	</jsp:include>
@@ -34,7 +34,7 @@
 	<jsp:include page="../incl/action.jsp">
 		<jsp:param name="type" value="print"/>
 		<jsp:param name="key" value="List"/>
-		<jsp:param name="action" value="WorkloadReport.do"/>
+		<jsp:param name="action" value="Report.do"/>
 		<jsp:param name="aparams" value="reportName=${reportName }&reportType=pdf"/>
 		<jsp:param name="method" value="print"/>
 	</jsp:include>
@@ -55,15 +55,10 @@
 
 <tr>
 	<td class="textr"><fmt:message key="StartDate"/></td>
-	<td>
-		<input type="text" name="StartDate" id="StartDate" value="${StartDate }"/>
-		<img src="jsp/images/miniDate.gif" border=0 alt="<fmt:message key="choosedate"/>" onclick="displayCalendar(document.forms[0].StartDate,'yyyy-mm-dd',this,false)">
-	</td>
+	<td><input type="text" name="StartDate" value="${StartDate }" onclick="displayCalendar(this,'yyyy-MM-dd');"/></td>
+
 	<td class="textr"><fmt:message key="EndDate"/></td>
-	<td>
-		<input type="text" name="EndDate" id="EndDate" value="${EndDate }"/>
-		<img src="jsp/images/miniDate.gif" border=0 alt="<fmt:message key="choosedate"/>" onclick="displayCalendar(document.forms[0].EndDate,'yyyy-mm-dd',this,false)">
-	</td>
+	<td><input type="text" name="EndDate" value="${EndDate }" onclick="displayCalendar(this,'yyyy-MM-dd');"/></td>
 </tr>
 </tbody>
 </table>

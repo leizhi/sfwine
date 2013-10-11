@@ -4,9 +4,9 @@
 <fmt:bundle basename="MessageBundle">
 <html>
 <head>
-<title><fmt:message key="sale"/></title>
+<title><fmt:message key="Package"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet">   
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
 <script type="text/javascript" src="jsp/js/calendar.js"></script>
 <script type="text/javascript" src="jsp/js/pop-lookup.js"></script>

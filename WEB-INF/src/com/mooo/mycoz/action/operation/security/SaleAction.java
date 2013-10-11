@@ -154,6 +154,8 @@ private static Log log = LogFactory.getLog(SaleAction.class);
 				contents += "售价:"+saleItem.getSalePrice()+"元/瓶 (2013)"+"\n";
 				contents += "http://86999.org/Sale.do?method=check&FC="+saleJob.getSaleCode();
 				
+				System.out.println("http://localhost:8080/sfwine/Sale.do?method=check&FC="+saleJob.getSaleCode());
+				
 	            Hashtable<EncodeHintType, Object> hintMap = new Hashtable<EncodeHintType, Object>();
 	            //指定纠错等级
 	            hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
