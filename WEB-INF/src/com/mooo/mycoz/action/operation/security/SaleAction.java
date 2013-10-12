@@ -245,6 +245,10 @@ private static Log log = LogFactory.getLog(SaleAction.class);
 		if (log.isDebugEnabled())log.debug("check");
 		try {
 			String fc = request.getParameter("FC");
+			
+			if(StringUtils.isNull(fc))
+				fc = request.getParameter("amp;FC");
+			
 			StringUtils.noNull(fc);
 			
 			SaleJob saleJob = new SaleJob();

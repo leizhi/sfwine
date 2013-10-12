@@ -29,7 +29,6 @@ import com.mooo.mycoz.dbobj.wineBranch.SaleJob;
 import com.mooo.mycoz.dbobj.wineBranch.SampleProduct;
 import com.mooo.mycoz.dbobj.wineBranch.Winery;
 import com.mooo.mycoz.framework.component.Page;
-import com.mooo.mycoz.framework.util.FilterXML;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
 
@@ -351,7 +350,6 @@ private static Log log = LogFactory.getLog(PackageAction.class);
 					value += "售价:"+siObj.getSalePrice()+"元/瓶 (2013)"+"\n";
 					value += "http://86999.org/Sale.do?method=check&FC="+sjObj.getSaleCode();
 
-					value = FilterXML.applyFilters(value);
 					// 在Label对象的构造子中指名单元格位置是第一列第一行(0,0)
 					// 以及单元格内容为test
 					Label label = new Label( 0 , rows , value );
