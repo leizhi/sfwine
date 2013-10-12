@@ -178,66 +178,6 @@ function MM_preloadImages() { //v3.0
           </c:forEach>
         </table>
         <br />
-        <%--
-        <table width="95%" cellpadding="0" cellspacing="1" bgcolor="#bfe8ff">
-          <tr>
-            <td height="43" colspan="2" align="center" bgcolor="#FFFFFF"><span class="style1">参评酒评组成员</span></td>
-          </tr>
-          <tr>
-            <td width="12%" align="center" bgcolor="#d5f0ff">酒评人名</td>
-            <td width="88%" align="center" bgcolor="#f4fbff">酒评人资历</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">付德旭</td>
-            <td bgcolor="#f4fbff">高级品酒师，四川省白酒评委 </td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">郭光彬</td>
-            <td bgcolor="#f4fbff">高级品酒师，四川省白酒评委 </td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">易绍洪</td>
-            <td bgcolor="#f4fbff">高级品酒师、中国白酒金三角专家委员会委员</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">杨轶嘉</td>
-            <td bgcolor="#f4fbff">高级品酒师、中国白酒金三角专家委员会委员</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">张友连</td>
-            <td bgcolor="#f4fbff">高级品酒师，四川省白酒评委 </td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">唐明蓉</td>
-            <td bgcolor="#f4fbff">四川省白酒评委、中国白酒金三角专家委员会委员</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">王思思</td>
-            <td bgcolor="#f4fbff">国家二级品酒师、四川省白酒评委</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">王勇</td>
-            <td bgcolor="#f4fbff">四川省白酒评委、中国白酒金三角专家委员会委员</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">许必晏</td>
-            <td bgcolor="#f4fbff">国家二级品酒师、四川省白酒评委</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">周娜</td>
-            <td bgcolor="#f4fbff">国家二级品酒师、四川省白酒评委</td>
-          </tr>
-        </table></td>
-      <td width="12" background="jsp/images/strack/k_right_r.gif">&nbsp;</td>
-    </tr>
-    
-    <tr>
-      <td><img src="jsp/images/strack/k_left_b.gif" alt="k" width="12" height="10" /></td>
-      <td height="10"><img src="jsp/images/strack/k_bottom.gif" alt="k" width="836" height="10" /></td>
-      <td><img src="jsp/images/strack/k_right_b.gif" alt="k" width="12" height="10" /></td>
-    </tr>
-  </table>
-  --%>
   <table width="850" cellspacing="0" cellpadding="0">
     <tr>
       <td><img src="jsp/images/strack/k_left_top.gif" alt="kuang" width="12" height="10" /></td>
@@ -272,30 +212,31 @@ function MM_preloadImages() { //v3.0
 
           <tr>
             <td width="17%" align="center" bgcolor="#d5f0ff">生产原料</td>
-            <td width="37%" bgcolor="#f4fbff">高粱，小麦，大米，糯米，玉米</td>
+            <td width="37%" bgcolor="#f4fbff">${product.material }</td>
             <td width="15%" align="center" bgcolor="#d5f0ff">生产工艺</td>
-            <td width="31%" bgcolor="#f4fbff">泥窖固态发酵，续糟配料，混蒸混烧，跑窖大循环传统发酵。</td>
+            <td width="31%" bgcolor="#f4fbff">${product.production }</td>
           </tr>
           <tr>
             <td align="center" bgcolor="#d5f0ff">窖池数量</td>
-            <td bgcolor="#f4fbff">40口</td>
+            <td bgcolor="#f4fbff">${winery.totalPits }口</td>
             <td align="center" bgcolor="#d5f0ff">窖池平均窖龄</td>
-            <td bgcolor="#f4fbff">10年</td>
+            <td bgcolor="#f4fbff">${winery.averageAgePits }年</td>
           </tr>
           <tr>
             <td align="center" bgcolor="#d5f0ff">20年以上窖池数量</td>
-            <td bgcolor="#f4fbff">四川资阳</td>
+            <td bgcolor="#f4fbff">${winery.hightAgePits }</td>
             <td align="center" bgcolor="#d5f0ff">发酵时长</td>
-            <td bgcolor="#f4fbff">60天</td>
+            <td bgcolor="#f4fbff">${product.fermentDays }天</td>
           </tr>
           <tr>
             <td align="center" bgcolor="#d5f0ff">每天产酒量</td>
-            <td bgcolor="#f4fbff">0.4吨</td>
+            <td bgcolor="#f4fbff">${winery.nissan }吨</td>
             <td align="center" bgcolor="#d5f0ff">优级酒以上数量</td>
-            <td bgcolor="#f4fbff">平均0.1吨/天</td>
+            <td bgcolor="#f4fbff">平均${winery.nissanTop }吨/天</td>
           </tr>
         </table>
       <br />
+      <%--
       <table width="95%" cellpadding="0" cellspacing="1" bgcolor="#bfe8ff">
         <tr>
           <td height="43" colspan="4" align="center" bgcolor="#FFFFFF"><span class="style1">源酒储存</span></td>
@@ -326,42 +267,38 @@ function MM_preloadImages() { //v3.0
         </tr>
       </table>
       <br />
+      --%>
+      
       <table width="95%" cellpadding="0" cellspacing="1" bgcolor="#bfe8ff">
         <tr>
           <td height="43" colspan="4" align="center" bgcolor="#FFFFFF"><span class="style1">成品酒组合</span></td>
         </tr>
         <tr>
           <td width="17%" align="center" bgcolor="#d5f0ff">组合时间</td>
-          <td width="37%" bgcolor="#f4fbff">2011年10月</td>
-          <td width="15%" align="center" bgcolor="#d5f0ff">基础酒储存年份</td>
-          <td width="31%" bgcolor="#f4fbff">3年</td>
+          <td width="37%" bgcolor="#f4fbff"><fmt:formatDate value="${sampleProduct.buildDate }" type="date" /></td>
+          <td width="15%" align="center" bgcolor="#d5f0ff">调酒师</td>
+          <td width="31%" bgcolor="#f4fbff">郭光彬</td>
         </tr>
-        <tr>
-          <td align="center" bgcolor="#d5f0ff">调味酒储存年份</td>
-          <td bgcolor="#f4fbff">10年</td>
-          <td align="center" bgcolor="#d5f0ff">基础酒占酒体比重</td>
-          <td bgcolor="#f4fbff">99％</td>
-        </tr>
-        <tr>
-          <td align="center" bgcolor="#d5f0ff">调味酒占酒体比重</td>
-          <td bgcolor="#f4fbff">1％</td>
-          <td align="center" bgcolor="#d5f0ff">是否添加非发酵物质</td>
-          <td bgcolor="#f4fbff">否</td>
-        </tr>
-        <tr>
-          <td align="center" bgcolor="#d5f0ff">非发酵物质含量</td>
-          <td bgcolor="#f4fbff">0.4吨</td>
-          <td align="center" bgcolor="#d5f0ff">调酒师</td>
-          <td bgcolor="#f4fbff">郭光彬</td>
-        </tr>
+       
+       <c:forEach var="item" items="${sampleItems}" varStatus="status">
+	       <tr>
+	          <td align="center" bgcolor="#d5f0ff"><c:out value="${item.itemName }"/></td>
+	          <td bgcolor="#f4fbff"><c:out value="${item.itemAge }"/>年</td>
+	          <td align="center" bgcolor="#d5f0ff"><c:out value="${item.itemVol }"/><c:out value="${item.itemVolUnit }"/></td>
+	          <td bgcolor="#f4fbff"><fmt:formatNumber value="${item.itemVol/totalVol }" type="percent" /></td>
+	        </tr>
+       </c:forEach>
+        <%-- 
         <tr>
           <td align="center" bgcolor="#d5f0ff">品酒师</td>
           <td bgcolor="#f4fbff">李泽隆、潘林涛、郭光彬、肖波、李梦秋、余鸣凤</td>
           <td align="center" bgcolor="#d5f0ff">二次储存时长</td>
           <td bgcolor="#f4fbff">6个月</td>
         </tr>
+        --%>
       </table>
       <br />
+      <%--
       <table width="95%" cellpadding="0" cellspacing="1" bgcolor="#bfe8ff">
         <tr>
           <td height="43" colspan="4" align="center" bgcolor="#FFFFFF"><span class="style1">成品酒灌装</span></td>
@@ -386,6 +323,7 @@ function MM_preloadImages() { //v3.0
         </tr>
       </table>
       <br />
+      
       <table width="95%" cellpadding="0" cellspacing="1" bgcolor="#bfe8ff">
         <tr>
           <td height="43" colspan="4" align="center" bgcolor="#FFFFFF"><span class="style1">质量检验</span></td>
@@ -420,7 +358,9 @@ function MM_preloadImages() { //v3.0
           <td align="center" bgcolor="#d5f0ff">&nbsp;</td>
           <td bgcolor="#f4fbff">&nbsp;</td>
         </tr>
-      </table></td>
+      </table>
+      --%>
+      </td>
       <td width="12" background="jsp/images/strack/k_right_r.gif">&nbsp;</td>
     </tr>
     <tr>
@@ -429,6 +369,7 @@ function MM_preloadImages() { //v3.0
       <td><img src="jsp/images/strack/k_right_b.gif" alt="k" width="12" height="10" /></td>
     </tr>
   </table>
+  
   <table width="100%" cellspacing="0" cellpadding="0">
     <tr>
       <td height="10"> </td>

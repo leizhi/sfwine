@@ -26,6 +26,7 @@ import com.mooo.mycoz.dbobj.wineBranch.Product;
 import com.mooo.mycoz.dbobj.wineBranch.Sale;
 import com.mooo.mycoz.dbobj.wineBranch.SaleItem;
 import com.mooo.mycoz.dbobj.wineBranch.SaleJob;
+import com.mooo.mycoz.dbobj.wineBranch.SampleItem;
 import com.mooo.mycoz.dbobj.wineBranch.SampleProduct;
 import com.mooo.mycoz.dbobj.wineBranch.SampleTasting;
 import com.mooo.mycoz.dbobj.wineBranch.Winery;
@@ -269,6 +270,19 @@ private static Log log = LogFactory.getLog(SaleAction.class);
 			sampleProduct.setId(saleItem.getSampleId());
 			sampleProduct.retrieve();
 			request.setAttribute("sampleProduct", sampleProduct);
+			
+			SampleItem sampleItem = new SampleItem();
+			sampleItem.setSampleId(sampleProduct.getId());
+			
+			List sil = sampleItem.searchAndRetrieveList();
+			double totalVol = 0d;
+			
+			for(Object obj:sil){
+				sampleItem = (SampleItem)obj;
+				totalVol+=sampleItem.getItemVol();
+			}
+			request.setAttribute("totalVol", totalVol);
+			request.setAttribute("sampleItems", sampleItem.searchAndRetrieveList());
 			
 			Product product = new Product();
 			product.setId(sampleProduct.getProductId());
