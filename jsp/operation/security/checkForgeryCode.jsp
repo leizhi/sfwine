@@ -13,7 +13,7 @@
 <script type="text/javascript" src="jsp/js/util.js"></script>
 
 <style type="text/css">
-body,td{font-family:Arial,Helvetica,sans-serif,"瀹嬩綋";font-size:14px;color:#000;margin:0;padding:0;}
+body,td{font-family:Arial,Helvetica,sans-serif,"宋体";font-size:14px;color:#000;margin:0;padding:0;}
 div,h1,h2,h3,h4,p,form,label,textarea,span,body,div,dl,dt,dd,ul,ol,li,pre,fieldset,input,textarea,blockquote,emBED{margin:0;padding:0;line-height: 28px;}
 img{border:none;}
 
@@ -38,21 +38,13 @@ a:focus{outline:none;-moz-outline:none;}
 .style3 {color: #009900; font-weight: bold; font-size: 18px; }
 .style5 {color: #FF9900; font-weight: bold; font-size: 18px; }
 </style>
+
 <script type="text/javascript">
-<!--
 function MM_preloadImages() { //v3.0
   var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
     var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
     if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
 }
-//-->
-/*
-function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKeywords=new Array("Android", "iPhone" ,"SymbianOS", "Windows Phone", "iPad", "iPod", "MQQBrowser"); var flag=false; 
-//排除windows系统 苹果系统
- if(userAgentInfo.indexOf("Windows NT")==-1){ flag=true; } return flag; } 
- //移动设备 
- if(checkserAgent()){ document.location.href="http://wap.163.com"; }
-*/
 </script>
 </head>
 
