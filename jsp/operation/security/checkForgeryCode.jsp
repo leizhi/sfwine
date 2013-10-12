@@ -63,12 +63,14 @@ function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKe
       <td class="top_bg">&nbsp;</td>
     </tr>
   </table>
+  <%-- 
   <table width="850" cellspacing="0" cellpadding="0">
     <tr>
       <td><img src="jsp/images/strack/k_left_top.gif" alt="kuang" width="12" height="10" /></td>
       <td height="10" background="jsp/images/strack/k_top.gif"><img src="jsp/images/strack/k_top.gif" alt="k" width="836" height="10" /></td>
       <td><img src="jsp/images/strack/k_right_top.gif" alt="k" width="12" height="10" /></td>
     </tr>
+    
     <tr>
       <td width="12" background="jsp/images/strack/k_left_m.gif">&nbsp;</td>
       <td align="left"><table width="100%" cellspacing="0" cellpadding="0">
@@ -83,12 +85,16 @@ function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKe
         　　5、市场售价：48元／瓶（2013版）</td>
       <td width="12" background="jsp/images/strack/k_right_r.gif">&nbsp;</td>
     </tr>
+    
     <tr>
       <td><img src="jsp/images/strack/k_left_b.gif" alt="k" width="12" height="10" /></td>
       <td height="10"><img src="jsp/images/strack/k_bottom.gif" alt="k" width="836" height="10" /></td>
       <td><img src="jsp/images/strack/k_right_b.gif" alt="k" width="12" height="10" /></td>
     </tr>
+    
   </table>
+  --%>
+  
   <table width="850" cellspacing="0" cellpadding="0">
     <tr>
       <td><img src="jsp/images/strack/k_left_top.gif" alt="kuang" width="12" height="10" /></td>
@@ -109,26 +115,29 @@ function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKe
           </tr>
           <tr>
             <td width="12%" align="center" bgcolor="#fff1d5">企业名称</td>
-            <td colspan="3" bgcolor="#fff1d5">四川宝莲酒业有限公司</td>
+            <td colspan="3" bgcolor="#fff1d5">${winery.enterpriseName }</td>
           </tr>
           <tr>
             <td align="center" bgcolor="#fff1d5">产品名称</td>
-            <td width="46%" bgcolor="#fffbf2">青花瓷</td>
+            <td width="46%" bgcolor="#fffbf2">${product.productName }</td>
             <td width="11%" align="center" bgcolor="#fff1d5">香型</td>
-            <td width="31%" bgcolor="#fffbf2">浓香型</td>
+            <td width="31%" bgcolor="#fffbf2">${product.flavor }</td>
           </tr>
           <tr>
             <td align="center" bgcolor="#fff1d5">净含量</td>
-            <td bgcolor="#fffbf2">500ml</td>
+            <td bgcolor="#fffbf2">${saleItem.saleVol }${saleItem.volUnit }</td>
             <td align="center" bgcolor="#fff1d5">酒精度</td>
-            <td bgcolor="#fffbf2">52度</td>
+            <td bgcolor="#fffbf2">${product.alcohol }度</td>
           </tr>
+          <%-- 
           <tr>
             <td align="center" bgcolor="#fff1d5">产地</td>
             <td bgcolor="#fffbf2">四川资阳</td>
             <td align="center" bgcolor="#fff1d5">生产日期</td>
             <td bgcolor="#fffbf2">2013年4月</td>
           </tr>
+          --%>
+          
       </table>
         <br />
         <table width="95%" cellpadding="0" cellspacing="1" bgcolor="#a4f6a5">
@@ -171,6 +180,7 @@ function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKe
             <td width="12%" align="center" bgcolor="#d5f0ff">专家名</td>
             <td width="88%" align="center" bgcolor="#f4fbff">专家资历</td>
           </tr>
+          
           <tr>
             <td align="center" bgcolor="#d5f0ff">吴德贤</td>
             <td bgcolor="#f4fbff">四川酿酒大师、国家级白酒评委</td>
@@ -205,6 +215,7 @@ function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKe
           </tr>
         </table>
         <br />
+        <%--
         <table width="95%" cellpadding="0" cellspacing="1" bgcolor="#bfe8ff">
           <tr>
             <td height="43" colspan="2" align="center" bgcolor="#FFFFFF"><span class="style1">参评酒评组成员</span></td>
@@ -256,12 +267,14 @@ function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKe
         </table></td>
       <td width="12" background="jsp/images/strack/k_right_r.gif">&nbsp;</td>
     </tr>
+    
     <tr>
       <td><img src="jsp/images/strack/k_left_b.gif" alt="k" width="12" height="10" /></td>
       <td height="10"><img src="jsp/images/strack/k_bottom.gif" alt="k" width="836" height="10" /></td>
       <td><img src="jsp/images/strack/k_right_b.gif" alt="k" width="12" height="10" /></td>
     </tr>
   </table>
+  --%>
   <table width="850" cellspacing="0" cellpadding="0">
     <tr>
       <td><img src="jsp/images/strack/k_left_top.gif" alt="kuang" width="12" height="10" /></td>
@@ -280,12 +293,10 @@ function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKe
             <td height="43" align="center"><span class="style1">企业介绍</span></td>
           </tr>
           <tr>
-            <td align="left" bgcolor="#f4fbff">　　四川宝莲酒业有限公司地处成渝双核地带资阳市，距成都86公里。是四川酿酒历史十分悠久的中华老字号企业，中国食品工业骨干企业，四川省老十大名酒企业之一，属四川省酿酒研究所的科研基地，酿酒技术力量十分雄厚。<br />
-              公司占地300亩，建筑面积40000㎡，采用西南园林式民居仿唐建筑风格，古朴与现代相结合，酒文化和生态特点突出。现拥有固定资产2.20亿元，员工428人，各类技术人员和评酒委员106人，年产销酒能力过万吨，销售市场遍及全国各地。<br />
-              公司产品由明朝永乐年间久负盛的伍市干酒传承演变而来，在上个世纪中期已经享誉华夏，畅销四方，通过不断的创新研究，现已形成宝莲系列、伍市干系列、千杯少系列三大系列100多个特色品种，其中“宝莲牌”宝莲系列酒为公司主导产品。酒品醇正，绵柔甘爽，深受消费者的广泛亲睐。产品先后获得“中国驰名商标”、“国家优质酒”、“中商部优质产品”、“四川省第三届名酒”、“四川名牌产品”、“四川省著名商标”、“四川老字号”等众多殊誉。<br />
-　　近年来，公司正紧紧抓住四川打造中国白酒金三角的大好机遇，以“打造宝莲新形象，再铸宝莲新辉煌”为不懈追求，投资8亿元，全力打造由15个项目支撑的宝莲酒业产业园，将公司壮大成持续发展，影响深远的全国知名酒类企业。 <br />
-　　公司地址：资阳市沱桥路25号   邮编：641300<br />
-　　电话：028-26252238 </td>
+            <td align="left" bgcolor="#f4fbff">
+            ${winery.introduction }
+　　公司地址：${winery.address }   邮编：${winery.zipcode }<br />
+　　电话：${winery.telephone } </td>
           </tr>
         </table>
         <br />
@@ -458,8 +469,7 @@ function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKe
       <td height="10"> </td>
     </tr>
     <tr>
-      <td class="copyright_bg"> 版权所有(C )四川省酿酒研究所 ICP证号：蜀ICP备09022149号-10<br />
-      [增值电信业务经营许可证A2.B1.B2-20090001] [文网文[2003]0001号] </td>
+      <td class="copyright_bg">Copyright 四川省酿酒研究所</td>
     </tr>
   </table>
 </center>
