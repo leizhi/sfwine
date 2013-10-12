@@ -270,7 +270,7 @@ function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKe
           </tr>
           <tr>
             <td align="left" bgcolor="#f4fbff">
-				<pre>${winery.introduction }</pre>
+				${winery.introduction }
 				公司地址：${winery.address }<br/>
 				邮编：${winery.zipcode }<br/>
 				电话：${winery.telephone }
