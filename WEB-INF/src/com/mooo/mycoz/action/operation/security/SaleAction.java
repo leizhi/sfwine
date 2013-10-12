@@ -274,15 +274,16 @@ private static Log log = LogFactory.getLog(SaleAction.class);
 			SampleItem sampleItem = new SampleItem();
 			sampleItem.setSampleId(sampleProduct.getId());
 			
-			List sil = sampleItem.searchAndRetrieveList();
+			List<?> sampleItems = sampleItem.searchAndRetrieveList();
+			request.setAttribute("sampleItems", sampleItems);
+
 			double totalVol = 0d;
 			
-			for(Object obj:sil){
+			for(Object obj:sampleItems){
 				sampleItem = (SampleItem)obj;
 				totalVol+=sampleItem.getItemVol();
 			}
 			request.setAttribute("totalVol", totalVol);
-			request.setAttribute("sampleItems", sampleItem.searchAndRetrieveList());
 			
 			Product product = new Product();
 			product.setId(sampleProduct.getProductId());
