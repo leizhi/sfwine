@@ -140,9 +140,9 @@ function MM_preloadImages() { //v3.0
           </tr>
           <tr>
             <td align="center" bgcolor="#BCFFBD">综合平均得分</td>
-            <td bgcolor="#F5FFFA">${sampleProduct.expertScore }</td>
+            <td bgcolor="#F5FFFA">${sampleProduct.expertScore } 分</td>
             <td align="center" bgcolor="#BCFFBD">醉酒度评价</td>
-            <td bgcolor="#F5FFFA">${sampleProduct.drunkLevel }分</td>
+            <td bgcolor="#F5FFFA">${sampleProduct.drunkLevel } 分</td>
           </tr>
           <tr>
             <td align="center" bgcolor="#BCFFBD">酒评人评语</td>
