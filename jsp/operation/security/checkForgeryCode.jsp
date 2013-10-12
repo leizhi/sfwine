@@ -112,7 +112,7 @@ function MM_preloadImages() { //v3.0
           </tr>
           <tr>
             <td align="center" bgcolor="#fff1d5">净含量</td>
-            <td bgcolor="#fffbf2">${saleItem.saleVol }${saleItem.volUnit }</td>
+            <td bgcolor="#fffbf2">${saleItem.saleVol }${saleItem.volUnit } <fmt:formatNumber value="${saleItem.salePrice }" type="currency"/>/瓶</td>
             <td align="center" bgcolor="#fff1d5">酒精度</td>
             <td bgcolor="#fffbf2">${product.alcohol }度</td>
           </tr>
