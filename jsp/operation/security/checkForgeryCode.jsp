@@ -21,7 +21,7 @@ a:link{color:#0069d4;text-decoration:none;}
 a:visited{color:#0069d4;text-decoration:none;}
 a:hover{color:#f24f00;text-decoration:underline;}
 a:active{color:#0069d4;}
-a:focus{outline:none;-moz-outline:none;}
+a:focus{outline:none;}
 
 .copyright_bg{background-image:url(jsp/images/strack/copyright_bg.gif); background-repeat:repeat-x; padding:0 30px 0 10px; height:104px; text-align:center; }
 
