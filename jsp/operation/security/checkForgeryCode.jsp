@@ -147,24 +147,26 @@ function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKe
 
           <tr>
             <td width="12%" align="center" bgcolor="#BCFFBD">评酒时间</td>
-            <td width="46%" bgcolor="#F5FFFA">2013/09/13　10:30－11:10AM</td>
+            <td width="46%" bgcolor="#F5FFFA"><fmt:formatDate value="${sampleProduct.tastingStartTime }" type="date" />~<fmt:formatDate value="${sampleProduct.tastingEndTime }" type="date" /></td>
             <td width="11%" align="center" bgcolor="#BCFFBD">评酒地点</td>
-            <td width="31%" bgcolor="#F5FFFA">四川省酿酒研究所</td>
+            <td width="31%" bgcolor="#F5FFFA">${sampleProduct.tastingSite }</td>
           </tr>
           <tr>
             <td align="center" bgcolor="#BCFFBD">综合平均得分</td>
-            <td bgcolor="#F5FFFA">93.95</td>
+            <td bgcolor="#F5FFFA">${sampleProduct.expertScore }</td>
             <td align="center" bgcolor="#BCFFBD">醉酒度评价</td>
-            <td bgcolor="#F5FFFA">5分</td>
+            <td bgcolor="#F5FFFA">${sampleProduct.drunkLevel }分</td>
           </tr>
           <tr>
             <td align="center" bgcolor="#BCFFBD">酒评人评语</td>
-            <td colspan="3" bgcolor="#F5FFFA">青花瓷乃国粹，中国优质白酒更是国粹，国优宝莲，清澈透明，酒香怡人，酒体中偏高度，味道丰满，余味净长，风格独特，难能可贵，老百姓喝得起的品质白酒！</td>
+            <td colspan="3" bgcolor="#F5FFFA">${sampleProduct.tastingComment }</td>
           </tr>
+          <%--
           <tr>
             <td align="center" bgcolor="#BCFFBD">附件</td>
             <td colspan="3" bgcolor="#F5FFFA">评分系统图片</td>
           </tr>
+          --%>
           <tr>
             <td align="center" bgcolor="#BCFFBD">评酒人</td>
             <td colspan="3" bgcolor="#F5FFFA">见下表</td>
@@ -181,38 +183,12 @@ function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKe
             <td width="88%" align="center" bgcolor="#f4fbff">专家资历</td>
           </tr>
           
+          <c:forEach var="item" items="${sampleTastings}" varStatus="status">
           <tr>
-            <td align="center" bgcolor="#d5f0ff">吴德贤</td>
-            <td bgcolor="#f4fbff">四川酿酒大师、国家级白酒评委</td>
+            <td align="center" bgcolor="#d5f0ff"><c:out value="${item.wineTaster.tasterName }"/></td>
+            <td bgcolor="#f4fbff"><c:out value="${item.wineTaster.tasterLicense }"/></td>
           </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">吴亚东</td>
-            <td bgcolor="#f4fbff">国家级白酒评委</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">杨官荣</td>
-            <td bgcolor="#f4fbff">四川酿酒大师、国家级白酒评委、一级白酒职业技术培训教师</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">黄志瑜</td>
-            <td bgcolor="#f4fbff">国家二级品酒师、四川省白酒评委</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">杨燕</td>
-            <td bgcolor="#f4fbff">国家二级品酒师、中国白酒金三角专家委员会委员</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">周玲</td>
-            <td bgcolor="#f4fbff">国家二级品酒师、中国白酒金三角专家委员会委员</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">李雷</td>
-            <td bgcolor="#f4fbff">国家二级品酒师、中国白酒金三角专家委员会委员</td>
-          </tr>
-          <tr>
-            <td align="center" bgcolor="#d5f0ff">陈发荣</td>
-            <td bgcolor="#f4fbff">国家二级品酒师、中国白酒金三角专家委员会委员</td>
-          </tr>
+          </c:forEach>
         </table>
         <br />
         <%--

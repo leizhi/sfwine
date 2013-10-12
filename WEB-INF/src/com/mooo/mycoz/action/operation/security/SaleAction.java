@@ -27,7 +27,9 @@ import com.mooo.mycoz.dbobj.wineBranch.Sale;
 import com.mooo.mycoz.dbobj.wineBranch.SaleItem;
 import com.mooo.mycoz.dbobj.wineBranch.SaleJob;
 import com.mooo.mycoz.dbobj.wineBranch.SampleProduct;
+import com.mooo.mycoz.dbobj.wineBranch.SampleTasting;
 import com.mooo.mycoz.dbobj.wineBranch.Winery;
+import com.mooo.mycoz.dbobj.wineShared.WineTaster;
 import com.mooo.mycoz.framework.component.Page;
 
 public class SaleAction extends BaseSupport {
@@ -274,6 +276,20 @@ private static Log log = LogFactory.getLog(SaleAction.class);
 			winery.retrieve();
 			
 			request.setAttribute("winery", winery);
+			
+			MultiDBObject dbobject = new MultiDBObject();
+			dbobject.addTable(SampleTasting.class, "sampleTasting");
+			dbobject.addTable(WineTaster.class, "wineTaster");
+			
+			dbobject.setForeignKey("wineTaster", "id","sampleTasting", "tasterId");
+			dbobject.setField("sampleTasting", "sampleId",sampleProduct.getId());
+
+			dbobject.setRetrieveField("sampleTasting", "id");
+			dbobject.setRetrieveField("wineTaster", "tasterName");
+			dbobject.setRetrieveField("wineTaster", "tasterLicense");
+			dbobject.setRetrieveField("wineTaster", "tasterCategory");
+			
+			request.setAttribute("sampleTastings", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
