@@ -147,7 +147,7 @@ function checkserAgent(){ var userAgentInfo=navigator.userAgent; var userAgentKe
 
           <tr>
             <td width="12%" align="center" bgcolor="#BCFFBD">评酒时间</td>
-            <td width="46%" bgcolor="#F5FFFA"><fmt:formatDate value="${sampleProduct.tastingStartTime }" type="date" />~<fmt:formatDate value="${sampleProduct.tastingEndTime }" type="date" /></td>
+            <td width="46%" bgcolor="#F5FFFA"><fmt:formatDate value="${sampleProduct.tastingStartTime }" type="both" />~<fmt:formatDate value="${sampleProduct.tastingEndTime }" type="both" /></td>
             <td width="11%" align="center" bgcolor="#BCFFBD">评酒地点</td>
             <td width="31%" bgcolor="#F5FFFA">${sampleProduct.tastingSite }</td>
           </tr>
