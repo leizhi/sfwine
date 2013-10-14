@@ -277,7 +277,7 @@ function MM_preloadImages() { //v3.0
           <td width="17%" align="center" bgcolor="#d5f0ff">组合时间</td>
           <td width="37%" bgcolor="#f4fbff"><fmt:formatDate value="${sampleProduct.buildDate }" type="date" /></td>
           <td width="15%" align="center" bgcolor="#d5f0ff">调酒师</td>
-          <td width="31%" bgcolor="#f4fbff">郭光彬</td>
+          <td width="31%" bgcolor="#f4fbff"><c:out value="${sampleProduct.buildPeople }"/></td>
         </tr>
        
        <c:forEach var="item" items="${sampleItems}" varStatus="status">
