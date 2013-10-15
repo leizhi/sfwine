@@ -207,7 +207,7 @@ function MM_preloadImages() { //v3.0
         <br />
         <table width="95%" cellpadding="0" cellspacing="1" bgcolor="#bfe8ff">
           <tr>
-            <td height="43" colspan="4" align="center" bgcolor="#FFFFFF"><span class="style1">源酒酿造</span></td>
+            <td height="43" colspan="4" align="center" bgcolor="#FFFFFF"><span class="style1">原酒酿造</span></td>
           </tr>
 
           <tr>
@@ -239,7 +239,7 @@ function MM_preloadImages() { //v3.0
       <%--
       <table width="95%" cellpadding="0" cellspacing="1" bgcolor="#bfe8ff">
         <tr>
-          <td height="43" colspan="4" align="center" bgcolor="#FFFFFF"><span class="style1">源酒储存</span></td>
+          <td height="43" colspan="4" align="center" bgcolor="#FFFFFF"><span class="style1">原酒储存</span></td>
         </tr>
         <tr>
           <td width="20%" align="center" bgcolor="#d5f0ff">入库时间</td>
