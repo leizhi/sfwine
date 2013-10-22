@@ -337,14 +337,8 @@ DrunkLevel=醉酒度评价
 WineTaster=评酒师
 TasterName=评酒师名称
 TasterLicense=评酒师资历
-<<<<<<< HEAD
-Expert=专业
-Profession=职业
->>=>>
-<<=<<
 Save=保存
 Member=成员
-=======
 Expert=专家
 Profession=职业
->>>>>>> fbec8057b7e03819e37e7f3ef32d976b9bbb897a
+Export=导出

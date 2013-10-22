@@ -50,6 +50,12 @@
 		<jsp:param name="action" value="Package.do"/>
 		<jsp:param name="method" value="print"/>
 	</jsp:include>
+	
+	<jsp:include page="../../incl/actionb.jsp">
+		<jsp:param name="key" value="Export"/>
+		<jsp:param name="action" value="Package.do"/>
+		<jsp:param name="method" value="export"/>
+	</jsp:include>
 </div>
 
 <div id="container">

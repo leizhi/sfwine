@@ -432,6 +432,7 @@
 			<result name="processItemDelete"></result>
 			<result name="processDelete"></result>
 			<result name="print">/jsp/incl/download.jsp</result>
+			<result name="export">/jsp/incl/download.jsp</result>
 		</action>
 
 		<action	name="Sale" default="list"

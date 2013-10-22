@@ -1,6 +1,9 @@
 package com.mooo.mycoz.action.operation.security;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -367,6 +370,193 @@ private static Log log = LogFactory.getLog(PackageAction.class);
 			sale.update();
 			
 			request.setAttribute("fileName", fName+".xls");
+		} catch (Exception e) {
+			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
+			request.setAttribute("error", e.getMessage());
+		}
+		return "success";
+	}
+	
+	public String export(HttpServletRequest request,HttpServletResponse response) {
+
+		String physicalPath = request.getSession().getServletContext().getRealPath("/");
+		try {
+			String saleId = request.getParameter("id");
+			StringUtils.noNull(saleId);
+
+			Sale sale = new Sale();
+			sale.setId(new Integer(saleId));
+			sale.retrieve();
+			
+			String fName = sale.getBatchNo();
+			String filePrefix=physicalPath+"tmp/"+fName;
+			
+			StringBuilder buffer = new StringBuilder();
+			buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+			buffer.append("<root xmlns=\"http://www.cdi.cn/handle\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n");
+			buffer.append("<ListRecords metedataStandard=\"chanpinleibie\">\n");
+			
+			SaleItem saleItem = new SaleItem();
+			saleItem.setSaleId(sale.getId());
+			
+			List<Object> saleItems = saleItem.searchAndRetrieveList();
+			
+			for(Object siBean:saleItems){
+
+				SaleItem siObj = (SaleItem)siBean;
+				
+				SampleProduct sampleProduct = new SampleProduct();
+				sampleProduct.setId(siObj.getSampleId());
+				sampleProduct.retrieve();
+				
+				Product product = new Product();
+				product.setId(sampleProduct.getProductId());
+				product.retrieve();
+				
+				Winery winery = new Winery();
+				winery.setId(product.getEnterpriseId());
+				winery.retrieve();
+				
+				SaleJob saleJob = new SaleJob();
+				saleJob.setItemId(siObj.getId());
+				
+				List<Object> saleJobs = saleJob.searchAndRetrieveList();
+				for(Object sjBean:saleJobs){
+					SaleJob sjObj = (SaleJob) sjBean;
+
+//					value = winery.getEnterpriseName1()+"."+product.getProductName()+"\n";
+//					value += "专家酒体评分:"+sampleProduct.getExpertScore()+"分"+"\n";
+//					value += "售价:"+siObj.getSalePrice()+"元/瓶 (2013)"+"\n";
+//					value += "http://86999.org/Sale.do?method=check&FC="+sjObj.getSaleCode();
+
+					buffer.append("<record>\n");
+					buffer.append("	<header>\n");
+					buffer.append("		<identifier>86.1000.19/"+sjObj.getSaleCode()+"</identifier>\n");
+					buffer.append("	</header>\n");
+					
+					buffer.append("	<metadata>\n");
+					
+					buffer.append("		<name>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+product.getProductName()+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</name>\n");
+					
+					buffer.append("		<netWeight>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+siObj.getSaleVol()+siObj.getVolUnit()+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</netWeight>\n");
+					
+					buffer.append("		<producersName>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+winery.getEnterpriseName()+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</producersName>\n");
+					
+					buffer.append("		<productStandardCode>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+""+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</productStandardCode>\n");
+					
+					buffer.append("		<productionLicenseNumber>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+""+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</productionLicenseNumber>\n");
+					
+					buffer.append("		<provenance>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+winery.getAddress()+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</provenance>\n");
+					
+					buffer.append("		<suitableAge>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+""+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</suitableAge>\n");
+					
+					buffer.append("		<warning>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+""+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</warning>\n");
+					
+					buffer.append("		<addressAndContact>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+winery.getAddress()+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</addressAndContact>\n");
+					
+					buffer.append("		<certificateNumber>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+""+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</certificateNumber>\n");
+					
+					buffer.append("		<ingredients>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+product.getMaterial()+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</ingredients>\n");
+					
+					buffer.append("		<storageCondition>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+""+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</storageCondition>\n");
+					
+					buffer.append("		<mainNutritionalCompositionAndContent>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+""+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</mainNutritionalCompositionAndContent>\n");
+					
+					buffer.append("		<productCategoryAndAttribute>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+""+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</productCategoryAndAttribute>\n");
+					
+					buffer.append("		<instructions>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+""+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</instructions>\n");
+					
+					buffer.append("		<otherInstructions>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+""+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</otherInstructions>\n");
+					
+					buffer.append("		<otherQualityCommitment>\n");
+					buffer.append("		 	<value>\n");
+					buffer.append("		 		<![CDATA[ "+""+"]]>\n");
+					buffer.append("			</value>\n");
+					buffer.append("		</otherQualityCommitment>\n");
+					
+					buffer.append("	</metadata>\n");
+					buffer.append("</record>\n");
+				}
+			}
+			
+			buffer.append("</ListRecords>\n");
+			buffer.append("</root>\n");
+			
+			FileOutputStream writerStream = new FileOutputStream(filePrefix+".xml");
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(writerStream, "UTF-8"));      
+			writer.write(buffer.toString());
+			writer.flush();
+			writer.close();
+			writerStream.close();
+			
+			sale.setIsSale("Y");
+			sale.update();
+			
+			request.setAttribute("fileName", fName+".xml");
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
