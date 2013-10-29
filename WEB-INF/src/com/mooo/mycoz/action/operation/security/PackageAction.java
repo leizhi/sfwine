@@ -431,7 +431,7 @@ private static Log log = LogFactory.getLog(PackageAction.class);
 
 					buffer.append("<record>\n");
 					buffer.append("	<header>\n");
-					buffer.append("		<identifier>86.1000.19/"+sjObj.getSaleCode()+"</identifier>\n");
+					buffer.append("		<identifier>86.1001.19/"+sjObj.getSaleCode()+"</identifier>\n");
 					buffer.append("	</header>\n");
 					
 					buffer.append("	<metadata>\n");

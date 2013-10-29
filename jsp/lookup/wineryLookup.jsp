@@ -41,7 +41,8 @@ try {
 	MultiDBObject dbobject = new MultiDBObject();
 	dbobject.addTable(Winery.class, "winery");
 
-	dbobject.setField("winery", "stateId",2);
+	//dbobject.setField("winery", "stateId",2);
+	dbobject.setNotEqual("winery", "stateId", 3);
 	
 	String category = ActionSession.getBranchCategory(request);
 
