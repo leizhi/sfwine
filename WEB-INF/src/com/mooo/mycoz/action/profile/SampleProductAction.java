@@ -16,6 +16,7 @@ import com.mooo.mycoz.dbobj.wineBranch.Product;
 import com.mooo.mycoz.dbobj.wineBranch.SampleItem;
 import com.mooo.mycoz.dbobj.wineBranch.SampleProduct;
 import com.mooo.mycoz.dbobj.wineBranch.SampleTasting;
+import com.mooo.mycoz.dbobj.wineBranch.SampleTest;
 import com.mooo.mycoz.dbobj.wineBranch.Winery;
 import com.mooo.mycoz.dbobj.wineShared.WarehouseItem;
 import com.mooo.mycoz.dbobj.wineShared.WineTaster;
@@ -101,6 +102,11 @@ public class SampleProductAction  extends BaseSupport {
 				
 				request.setAttribute("product", product);
 	
+				SampleTest sampleTest = new SampleTest();
+				sampleTest.setSampleId(sampleProduct.getId());
+				sampleTest.retrieve();
+				request.setAttribute("sampleTest", sampleTest);
+
 				MultiDBObject dbobject = new MultiDBObject();
 				dbobject.addTable(SampleProduct.class, "sampleProduct");
 				dbobject.addTable(SampleItem.class, "sampleItem");
@@ -262,6 +268,21 @@ public class SampleProductAction  extends BaseSupport {
 			sampleProduct.update();
 			
 			request.setAttribute("sampleProduct", sampleProduct);
+
+			SampleTest sampleTest = new SampleTest();
+			sampleTest.setSampleId(sampleProduct.getId());
+
+			if(sampleTest.count()<1){
+				sampleTest.setId(IDGenerator.getNextInt(SampleTest.class));
+				ParamUtil.bindData(request, sampleTest,"sampleTest");
+
+				sampleTest.add();
+			}else{
+				ParamUtil.bindData(request, sampleTest,"sampleTest");
+
+				sampleTest.update();
+			}
+			request.setAttribute("sampleTest", sampleTest);
 
 			request.setAttribute("message", "Operating successfully");
 		} catch (Exception e) {

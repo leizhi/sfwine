@@ -43,6 +43,28 @@
 <table class="st">
 <caption><fmt:message key="Sale"/></caption>
 <tbody>
+
+<tr>
+	<td  class="textr"><fmt:message key="Winery"/></td>
+	<td><select name="wineryId" onchange="document.forms[0].submit();">
+			<option selected="selected" value="">All</option>
+			<c:forEach var="items" items="${winerys}" varStatus="s">
+				<option value="${items.winery.id}"
+		
+				<c:if test="${items.winery.id==param.wineryId}">
+					selected="selected"
+				</c:if>
+					>
+				${items.winery.enterpriseName}
+				</option>
+			--</c:forEach>
+		</select>
+	</td>
+	
+	<td class="textr"></td>
+	<td></td>
+</tr>
+
 <tr>
 	<td class="textr"><fmt:message key="ForgeryCode"/></td>
 	<td><input name="SaleCode" value="${SaleCode }"/></td>

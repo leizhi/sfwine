@@ -29,9 +29,12 @@ import com.mooo.mycoz.dbobj.wineBranch.SaleJob;
 import com.mooo.mycoz.dbobj.wineBranch.SampleItem;
 import com.mooo.mycoz.dbobj.wineBranch.SampleProduct;
 import com.mooo.mycoz.dbobj.wineBranch.SampleTasting;
+import com.mooo.mycoz.dbobj.wineBranch.SampleTest;
 import com.mooo.mycoz.dbobj.wineBranch.Winery;
 import com.mooo.mycoz.dbobj.wineShared.WineTaster;
+import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.Page;
+import com.mooo.mycoz.framework.util.IDGenerator;
 
 public class SaleAction extends BaseSupport {
 
@@ -39,6 +42,7 @@ private static Log log = LogFactory.getLog(SaleAction.class);
 
 	public String list(HttpServletRequest request,HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("list");
+		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 
 		String value = null;
 		try {
@@ -110,6 +114,9 @@ private static Log log = LogFactory.getLog(SaleAction.class);
 			List<?> results = dbobject.searchAndRetrieveList();
 			
 			request.setAttribute("results", results);
+			
+			request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId));
+
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
@@ -271,6 +278,11 @@ private static Log log = LogFactory.getLog(SaleAction.class);
 			sampleProduct.retrieve();
 			request.setAttribute("sampleProduct", sampleProduct);
 			
+			SampleTest sampleTest = new SampleTest();
+			sampleTest.setSampleId(sampleProduct.getId());
+			sampleTest.retrieve();
+			request.setAttribute("sampleTest", sampleTest);
+
 			SampleItem sampleItem = new SampleItem();
 			sampleItem.setSampleId(sampleProduct.getId());
 			

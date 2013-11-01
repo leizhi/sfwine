@@ -323,43 +323,39 @@ function MM_preloadImages() { //v3.0
         </tr>
       </table>
       <br />
-      
+            --%>
       <table width="95%" cellpadding="0" cellspacing="1" bgcolor="#bfe8ff">
         <tr>
           <td height="43" colspan="4" align="center" bgcolor="#FFFFFF"><span class="style1">质量检验</span></td>
         </tr>
         <tr>
           <td width="17%" align="center" bgcolor="#d5f0ff">常规检验</td>
-          <td width="37%" bgcolor="#f4fbff">有</td>
+          <td width="37%" bgcolor="#f4fbff"><c:if test="${sampleTest.generalTesting=='Y' }">有</c:if><c:if test="${sampleTest.generalTesting=='N' }">无</c:if></td>
           <td width="15%" align="center" bgcolor="#d5f0ff">理化检测</td>
-          <td width="31%" bgcolor="#f4fbff">有</td>
+          <td width="31%" bgcolor="#f4fbff"><c:if test="${sampleTest.generalTesting=='Y' }">有</c:if><c:if test="${sampleTest.generalTesting=='N' }">无</c:if></td>
         </tr>
         <tr>
           <td align="center" bgcolor="#d5f0ff">塑化剂检测</td>
-          <td bgcolor="#f4fbff">无</td>
+          <td bgcolor="#f4fbff"><c:if test="${sampleTest.generalTesting=='Y' }">有</c:if><c:if test="${sampleTest.generalTesting=='N' }">无</c:if></td>
           <td align="center" bgcolor="#d5f0ff">检测时间</td>
-          <td bgcolor="#f4fbff">2011年12月23日</td>
+          <td bgcolor="#f4fbff"><fmt:formatDate value="${sampleTest.testingDate }" type="date" /></td>
         </tr>
         <tr>
           <td align="center" bgcolor="#d5f0ff">检验报告编号</td>
-          <td bgcolor="#f4fbff">BL/QR8.3-07（1）</td>
+          <td bgcolor="#f4fbff"><c:out value="${sampleTest.reportNo }"/></td>
           <td align="center" bgcolor="#d5f0ff">检测人</td>
-          <td bgcolor="#f4fbff">&nbsp;</td>
+          <td bgcolor="#f4fbff"><c:out value="${sampleTest.testingPerson }"/></td>
         </tr>
         <tr>
           <td align="center" bgcolor="#d5f0ff">主要检验器具</td>
-          <td bgcolor="#f4fbff">液相、气相色谱；质谱联用仪；酒精计；蒸发皿；三角瓶；电子天平</td>
-          <td align="center" bgcolor="#d5f0ff">&nbsp;</td>
-          <td bgcolor="#f4fbff">&nbsp;</td>
+          <td bgcolor="#f4fbff" colspan="3"><c:out value="${sampleTest.testTools }"/></td>
         </tr>
         <tr>
           <td align="center" bgcolor="#d5f0ff">检验标准</td>
-          <td bgcolor="#f4fbff">GB/T10781.1-2006</td>
-          <td align="center" bgcolor="#d5f0ff">&nbsp;</td>
-          <td bgcolor="#f4fbff">&nbsp;</td>
+          <td bgcolor="#f4fbff" colspan="3"><c:out value="${sampleTest.testNorm }"/></td>
         </tr>
       </table>
-      --%>
+
       </td>
       <td width="12" background="jsp/images/strack/k_right_r.gif">&nbsp;</td>
     </tr>

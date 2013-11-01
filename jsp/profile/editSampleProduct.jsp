@@ -6,7 +6,7 @@
 <head>
 <title><fmt:message key="sampleProduct"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet">   
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
 <script type="text/javascript" src="jsp/js/calendar.js"></script>
 <script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
@@ -69,47 +69,6 @@
 <td class="tl"><fmt:message key="Operator"/></td>
 <td><input type="text" name="sampleProduct.buildPeople" value="${sampleProduct.buildPeople }" size="10"/></td>
 </tr>
-
-<%-- 
-<tr>
-<td class="tl"><fmt:message key="Tasting"/><fmt:message key="StartTime"/></td>
-<td>
-<input type="text" name="sampleProduct.tastingStartTime" value="<fmt:formatDate value="${sampleProduct.tastingStartTime }" type="both"/>" size="19" maxlength="19" onclick="displayCalendar(this,'yyyy-MM-dd hh:mm:ss');"/>
-<font class="fm">*</font>
-</td>
-
-<td class="tl"><fmt:message key="Tasting"/><fmt:message key="EndTime"/></td>
-<td>
-<input type="text" name="sampleProduct.tastingEndTime" value="<fmt:formatDate value="${sampleProduct.tastingEndTime }" type="both"/>" size="19" maxlength="19" onclick="displayCalendar(this,'yyyy-MM-dd hh:mm:ss');"/>
-<font class="fm">*</font></td>
-</tr>
-
-<tr>
-<td class="tl"><fmt:message key="TastingSite"/></td>
-<td>
-<input type="text" name="sampleProduct.tastingSite" value="${sampleProduct.tastingSite }" />
-<font class="fm">*</font></td>
-
-<td class="tl"><fmt:message key="ExpertScore"/></td>
-<td>
-<input type="text" name="sampleProduct.expertScore" value="${sampleProduct.expertScore }" size="5"/>(分)
-<font class="fm">*</font></td>
-</tr>
-
-<tr>
-<td class="tl"><fmt:message key="DrunkLevel"/></td>
-<td  colspan="3">
-<input type="text" name="sampleProduct.drunkLevel" value="${sampleProduct.drunkLevel }" size="5"/>(分)
-<font class="fm">*</font></td>
-</tr>
-
-<tr>
-<td class="tl"><fmt:message key="TastingComment"/></td>
-<td  colspan="3">
-<textarea rows="3" cols="70" name="sampleProduct.tastingComment">${sampleProduct.tastingComment }</textarea>
-<font class="fm">*</font></td>
-</tr>
---%>
 
 </tbody>
 
@@ -198,31 +157,6 @@
 <caption><fmt:message key="Tasting"/></caption>
 
 <tbody>
-<%-- 
-<tr>
-<td  class="tl"><fmt:message key="Name"/></td>
-<td>
-<input type="text" name="sampleProduct.sampleName" value="${sampleProduct.sampleName }" readonly="readonly"/>
-<input type="hidden" name="sampleProduct.id" value="${sampleProduct.id }"/>
-</td>
-
-<td  class="tl"><fmt:message key="Product"/></td>
-<td>
-	<input type="text" id="product" name="product.productName" value="${product.productName }"/>
-	<img src="jsp/images/miniSearch.gif" border=0 alt="<fmt:message key="choosedate"/>" onclick="openLookup('jsp/lookup/productLookup.jsp','forms[0].product');return false;">
-</td>
-</tr>
-
-<tr>
-<td class="tl"><fmt:message key="Date"/></td>
-<td>
-<input type="text" name="sampleProduct.buildDate" value="<fmt:formatDate value="${sampleProduct.buildDate }" type="date"/>" size="10" maxlength="10" onclick="displayCalendar(this,'yyyy-MM-dd');"/>
-<font class="fm">*</font></td>
-
-<td class="tl"><fmt:message key="Operator"/></td>
-<td><input type="text" name="sampleProduct.buildPeople" value="${sampleProduct.buildPeople }" size="10"/></td>
-</tr>
---%>
 
 <tr>
 <td class="tl"><fmt:message key="Tasting"/><fmt:message key="StartTime"/></td>
@@ -260,6 +194,82 @@
 <td class="tl"><fmt:message key="TastingComment"/></td>
 <td  colspan="3">
 <textarea rows="3" cols="70" name="sampleProduct.tastingComment">${sampleProduct.tastingComment }</textarea>
+<font class="fm">*</font></td>
+</tr>
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+<tr>
+<td>
+
+<table class="modify">
+<caption><fmt:message key="QualityTesting"/></caption>
+
+<tbody>
+
+<tr>
+<td class="tl"><fmt:message key="GeneralTesting"/></td>
+<td>
+<input type="hidden" name="sampleTest.id" value="${sampleTest.id }"/>
+
+<select name="sampleTest.generalTesting">
+	<option value="Y" <c:if test="${sampleTest.generalTesting=='Y' }">selected="selected"</c:if> >有</option>
+	<option value="N" <c:if test="${sampleTest.generalTesting=='N' }">selected="selected"</c:if> >无</option>
+</select>
+<font class="fm">*</font>
+</td>
+
+<td class="tl"><fmt:message key="ChemistryTesting"/></td>
+<td>
+<select name="sampleTest.chemistryTesting">
+	<option value="Y" <c:if test="${sampleTest.chemistryTesting=='Y' }">selected="selected"</c:if> >有</option>
+	<option value="N" <c:if test="${sampleTest.chemistryTesting=='N' }">selected="selected"</c:if> >无</option>
+</select>
+<font class="fm">*</font></td>
+</tr>
+
+<tr>
+<td class="tl"><fmt:message key="PlasticTesting"/></td>
+<td>
+<select name="sampleTest.plasticTesting">
+	<option value="Y" <c:if test="${sampleTest.plasticTesting=='Y' }">selected="selected"</c:if> >有</option>
+	<option value="N" <c:if test="${sampleTest.plasticTesting=='N' }">selected="selected"</c:if> >无</option>
+</select>
+<font class="fm">*</font></td>
+
+<td class="tl"><fmt:message key="TestingDate"/></td>
+<td>
+<input type="text" name="sampleTest.testingDate" value="<fmt:formatDate value="${sampleTest.testingDate }" type="date"/>" size="10" maxlength="10" onclick="displayCalendar(this,'yyyy-MM-dd');"/>
+<font class="fm">*</font></td>
+</tr>
+
+<tr>
+<td class="tl"><fmt:message key="ReportNo"/></td>
+<td>
+<input type="text" name="sampleTest.reportNo" value="${sampleTest.reportNo }"/>
+<font class="fm">*</font></td>
+
+<td class="tl"><fmt:message key="TestingPerson"/></td>
+<td>
+<input type="text" name="sampleTest.testingPerson" value="${sampleTest.testingPerson }"/>
+<font class="fm">*</font></td>
+</tr>
+
+<tr>
+<td class="tl"><fmt:message key="TestTools"/></td>
+<td  colspan="3">
+<textarea rows="3" cols="70" name="sampleTest.testTools">${sampleTest.testTools }</textarea>
+<font class="fm">*</font></td>
+</tr>
+
+<tr>
+<td class="tl"><fmt:message key="TestNorm"/></td>
+<td  colspan="3">
+<input type="text" name="sampleTest.testNorm" value="${sampleTest.testNorm }"/>
 <font class="fm">*</font></td>
 </tr>
 
