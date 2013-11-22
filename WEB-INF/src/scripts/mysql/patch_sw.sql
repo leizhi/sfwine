@@ -812,3 +812,6 @@ alter table SampleTasting change  `sommelier` `tasterId` int(11) DEFAULT NULL;
 alter table SampleTasting add CONSTRAINT `SampleTasting_ibfk_2` FOREIGN KEY (`tasterId`) REFERENCES `wineShared`.`WineTaster` (`id`);
 
 alter table SaleItem change  `salePrice` `salePrice` decimal(7,2) DEFAULT NULL;
+
+
+alter table WineJar change  `jarNumber` `jarNumber` varchar(5) DEFAULT NULL;

@@ -567,7 +567,7 @@ private static Log log = LogFactory.getLog(WineJarAction.class);
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
-
+			e.printStackTrace();
 			return "listWineJar";
 		}
 		return "success";

@@ -199,7 +199,7 @@
 <tr>
 <td class="tl"><fmt:message key="CreateDate"/></td>
 <td>
-<input type="text" name="wineJar.createDate" value="<fmt:formatDate value="${wineJar.createDate }" pattern="both"/>" onclick="displayCalendar(this,'yyyy-MM-dd hh:mm:ss');"/>
+<input type="text" name="wineJar.createDate" value="<fmt:formatDate value="${wineJar.createDate }" type="both"/>" onclick="displayCalendar(this,'yyyy-MM-dd hh:mm:ss');"/>
 </td>
 </tr>
 
