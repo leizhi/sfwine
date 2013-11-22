@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/jsp/incl/static.inc"%>
 <fmt:bundle basename="MessageBundle">
@@ -6,11 +6,11 @@
 <head>
 <title><fmt:message key="WineJar"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet">   
-<script type="text/javascript" src="jsp/js/util.js"></script>
-<link type="text/css" rel="stylesheet" href="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112" media="screen"/>
-<script type="text/javascript" src="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.js?random=20060118"></script>
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
+<script type="text/javascript" src="jsp/js/calendar.js"></script>
+<script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
+<script type="text/javascript" src="jsp/js/util.js"></script>
 </head>
 
 <body>
@@ -44,17 +44,17 @@
 <tbody>
 <tr>
 <td class="tl"><fmt:message key="Start"/></td>
-<td><input type="text" name="startJarNumber" size="3" maxlength="3"/><font class="fm">*</font></td>
+<td><input type="text" name="startJarNumber" size="4" maxlength="4"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
 <td class="tl"><fmt:message key="End"/></td>
-<td><input type="text" name="endJarNumber" size="3" maxlength="3"/><font class="fm">*</font></td>
+<td><input type="text" name="endJarNumber" size="4" maxlength="4"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
 <td class="tl"><fmt:message key="Suffix"/></td>
-<td><input type="text" name="suffixJarNumber"  size="1" maxlength="1"/><font class="fm">*</font></td>
+<td><input type="text" name="suffixJarNumber"  size="1" maxlength="1"/></td>
 </tr>
 
 <tr>
@@ -211,8 +211,7 @@
 <tr>
 <td class="tl"><fmt:message key="CreateDate"/></td>
 <td>
-<input type="text" name="wineJar.createDate" id="createDate" value="<fmt:formatDate value="${wineJar.createDate }" pattern="yyyy-MM-dd hh:mm"/>"/>
-<img src="jsp/images/miniDate.gif" border=0 alt="<fmt:message key="choosedate"/>" onclick="displayCalendar(document.forms[0].createDate,'yyyy-mm-dd',this)">
+<input type="text" name="wineJar.createDate" value="<fmt:formatDate value="${wineJar.createDate }" type="both"/>" size="19" maxlength="19" onclick="displayCalendar(this,'yyyy-MM-dd hh:mm:ss');"/>
 <font class="fm">*</font>
 </td>
 </tr>
