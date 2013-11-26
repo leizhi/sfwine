@@ -58,15 +58,19 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			String startDate = request.getParameter("StartDate");
 			String endDate = request.getParameter("EndDate");
 
-			if(startDate!=null)
-				request.setAttribute("StartDate", CalendarUtils.dtparse(startDate));
-			else
+			if(startDate==null){
 				request.setAttribute("StartDate", sDate);
-
-			if(endDate!=null)
-				request.setAttribute("EndDate", CalendarUtils.dtparse(endDate));
-			else
+				startDate = CalendarUtils.dformat(sDate);
+			}else{
+				request.setAttribute("StartDate", CalendarUtils.dtparse(startDate));
+			}
+			
+			if(endDate==null){
 				request.setAttribute("EndDate", eDate);
+				endDate = CalendarUtils.dformat(eDate);
+			}else{
+				request.setAttribute("EndDate", CalendarUtils.dtparse(endDate));
+			}
 			
 			request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId,true));
 
