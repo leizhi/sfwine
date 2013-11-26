@@ -815,3 +815,29 @@ alter table SaleItem change  `salePrice` `salePrice` decimal(7,2) DEFAULT NULL;
 
 
 alter table WineJar change  `jarNumber` `jarNumber` varchar(5) DEFAULT NULL;
+
+SELECT cardJob.id,cardJob.jobDate,user.name,jobType.definition,wineJar.jarNumber,count(cardJob.id) 
+FROM wineShared.JobType jobType,wineBranch.WineJar wineJar,wineBranch.CardJob cardJob,
+wineBranch.Card card,wineBranch.User user,wineBranch.Winery winery
+WHERE wineJar.wineryId=winery.id AND wineJar.branchId=winery.branchId 
+AND card.wineJarId=wineJar.id AND card.branchId=wineJar.branchId AND
+cardJob.cardId=card.id AND cardJob.branchId=card.branchId AND
+cardJob.userId=user.id AND cardJob.branchId=user.branchId AND 
+cardJob.jobTypeId=jobType.id AND card.branchId=4 
+AND cardJob.jobTypeId=3 
+GROUP BY DATE_FORMAT( cardJob.jobDate, "%Y-%m-%d"),winery.id,wineJar.jarNumber,card.id
+
+SELECT cardJob.id,cardJob.jobDate,user.name,jobType.definition,wineJar.jarNumber,count(cardJob.id) 
+FROM wineShared.JobType jobType,wineBranch.WineJar wineJar,wineBranch.CardJob cardJob,
+wineBranch.Card card,wineBranch.User user,wineBranch.Winery winery
+WHERE wineJar.wineryId=winery.id AND wineJar.branchId=winery.branchId 
+AND card.wineJarId=wineJar.id AND card.branchId=wineJar.branchId AND
+cardJob.cardId=card.id AND cardJob.branchId=card.branchId AND
+cardJob.userId=user.id AND cardJob.branchId=user.branchId AND 
+cardJob.jobTypeId=jobType.id AND card.branchId=4 
+AND cardJob.jobTypeId=3 
+GROUP BY DATE_FORMAT( cardJob.jobDate, "%Y-%m-%d"),winery.id,wineJar.jarNumber,card.id
+
+select * from CardJob GROUP BY DATE_FORMAT( cardJob.jobDate, "%Y-%m-%d");
+
+

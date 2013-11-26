@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/jsp/incl/static.inc"%>
 <fmt:bundle basename="MessageBundle">
@@ -6,10 +6,11 @@
 <head>
 <title><fmt:message key="WineJar"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet">   
-<script type="text/javascript" src="jsp/js/util.js"></script>
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
 <script type="text/javascript" src="jsp/js/calendar.js"></script>
+<script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
+<script type="text/javascript" src="jsp/js/util.js"></script>
 </head>
 
 <body>

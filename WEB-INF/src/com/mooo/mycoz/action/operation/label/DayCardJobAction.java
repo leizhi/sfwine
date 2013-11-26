@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -49,18 +50,23 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 		String value = null;
 		try {
 			Calendar now = Calendar.getInstance();
+			Date eDate = now.getTime();
 			
+			now.add(Calendar.DAY_OF_MONTH, -1);
+			Date sDate = now.getTime();
+
 			String startDate = request.getParameter("StartDate");
-			if(startDate==null){
-				startDate = CalendarUtils.dformat(now.getTime());
-			}
-			request.setAttribute("StartDate", startDate);
-			
 			String endDate = request.getParameter("EndDate");
-			now.setTime(CalendarUtils.dparse(startDate));
-			now.add(Calendar.DAY_OF_MONTH, 1);
-			endDate = CalendarUtils.dformat(now.getTime());
-			request.setAttribute("EndDate", endDate);
+
+			if(startDate!=null)
+				request.setAttribute("StartDate", CalendarUtils.dtparse(startDate));
+			else
+				request.setAttribute("StartDate", sDate);
+
+			if(endDate!=null)
+				request.setAttribute("EndDate", CalendarUtils.dtparse(endDate));
+			else
+				request.setAttribute("EndDate", eDate);
 			
 			request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId,true));
 
@@ -112,8 +118,14 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			
 			dbobject.setForeignKey("cardJob", "jobTypeId","jobType", "id");
 
-			dbobject.setField("jobType", "id",2);
+			dbobject.setField("jobType", "id",3);
 			dbobject.addCustomWhereClause("wineJar.stateId<>3");
+			
+			if(!StringUtils.isNull(startDate))
+				dbobject.setGreaterEqual("cardJob", "jobDate", startDate);
+			
+			if(!StringUtils.isNull(endDate))
+				dbobject.setLessEqual("cardJob", "jobDate", endDate);
 			
 			value = request.getParameter("WineJar");
 			if(!StringUtils.isNull(value)){
@@ -144,10 +156,17 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			dbobject.setRetrieveField("card", "branchId");
 			dbobject.setRetrieveField("jobType", "id");
 			dbobject.setRetrieveField("jobType", "definition");
+			dbobject.setRetrieveField("cardJob", "jobDate");
 
+			dbobject.setGroupBy("DATE_FORMAT(cardJob", "jobDate, '%Y-%m-%d')");
+			dbobject.setGroupBy("winery", "id");
+			dbobject.setGroupBy("wineJar", "jarNumber");
+			dbobject.setGroupBy("card", "id");
+			
+			dbobject.setOrderBy("DATE_FORMAT(cardJob", "jobDate, '%Y-%m-%d')","DESC");
 			dbobject.setOrderBy("winery", "id");
-			dbobject.setOrderBy("wineJar", "id");
-			dbobject.setOrderBy("card", "id","DESC");
+			dbobject.setOrderBy("wineJar", "jarNumber");
+			dbobject.setOrderBy("card", "id");
 			
 			Page page = new Page();
 			page.buildComponent(request, dbobject.count());
@@ -155,7 +174,6 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			dbobject.setRecord(page.getOffset(),page.getPageSize());
 			
 			List<?> resuls = dbobject.searchAndRetrieveList();
-			
 			for(Object orow:resuls){
 				buffer.append("<Rows>\n");
 				Map<String,Object> rowm = (Map)orow;
@@ -192,87 +210,18 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 				}
 				buffer.append("<Key3>"+value+"</Key3>\n");
 
-				boolean exitsPatrol=false;
+				CardJob gCardJob = (CardJob)rowm.get("cardJob");
 				
-				Integer jobTypeId=0;
-
 				CardJob cardJob = new CardJob();
 				cardJob.setCardId(card.getId());
 				cardJob.setBranchId(card.getBranchId());
-				cardJob.setProcessId(0);
-				cardJob.setGreaterEqual("jobTypeId", 8);
-				cardJob.retrieve();
+				cardJob.setLike("jobDate", CalendarUtils.dformat(gCardJob.getJobDate()) );
+				cardJob.setGreaterEqual("jobTypeId", 3);
 				
-				String patrol = "N";
+				int count = cardJob.count();
 				
-				if(cardJob.count()==1){
-					exitsPatrol = true;
-					JobType jobType = new JobType();
-					jobType.setId(cardJob.getJobTypeId());
-					jobType.retrieve();
-					patrol = jobType.getDefinition();
-					jobTypeId = jobType.getId();
-				}
+				rowm.put("countPatrol", count);
 				
-				if(!exitsPatrol){
-					MultiDBObject mdbobj = new MultiDBObject();
-					
-					mdbobj.addTable(Winery.class, "winery");
-					mdbobj.addTable(WineJar.class, "wineJar");
-					mdbobj.addTable(Card.class, "card");
-					mdbobj.addTable(CardJob.class, "cardJob");
-
-					mdbobj.addTable(User.class, "user");
-					mdbobj.addTable(JobType.class, "jobType");
-
-					mdbobj.setForeignKey("wineJar", "wineryId", "winery", "id");
-					mdbobj.setForeignKey("wineJar", "branchId", "winery", "branchId");
-					
-					mdbobj.setForeignKey("card", "wineJarId", "wineJar", "id");
-					mdbobj.setForeignKey("card", "branchId", "wineJar", "branchId");
-					
-					mdbobj.setForeignKey("cardJob", "cardId", "card", "id");
-					mdbobj.setForeignKey("cardJob", "branchId", "card", "branchId");
-					
-					mdbobj.setForeignKey("cardJob", "userId","user", "id");
-					mdbobj.setForeignKey("cardJob", "branchId","user", "branchId");
-					
-					mdbobj.setForeignKey("cardJob", "jobTypeId","jobType", "id");
-
-					mdbobj.setField("card", "id",card.getId());
-					mdbobj.setField("card", "branchId",card.getBranchId());
-					mdbobj.setField("cardJob","jobTypeId", 3);
-
-					if(!StringUtils.isNull(startDate))
-						mdbobj.setGreaterEqual("cardJob", "jobDate", startDate);
-					
-					mdbobj.setLessEqual("cardJob", "jobDate", endDate);
-	
-					mdbobj.setRetrieveField("cardJob", "id");
-					mdbobj.setRetrieveField("cardJob", "jobDate");
-					mdbobj.setRetrieveField("user", "name");
-					mdbobj.setRetrieveField("jobType", "definition");
-					mdbobj.setRetrieveField("wineJar", "jarNumber");
-	
-					mdbobj.setGroupBy("cardJob", "id");
-					
-					int count = mdbobj.count();
-					
-					if(count>0){
-						exitsPatrol=true;
-						List<?> myresults = mdbobj.searchAndRetrieveList();
-						for(Object obj:myresults){
-							Map<String,Object> rbean = (Map)obj;
-							JobType jobType = (JobType) rbean.get("jobType");
-							patrol = jobType.getDefinition();
-							jobTypeId = jobType.getId();
-						}
-					}
-				}
-				
-				rowm.put("jobTypeId", jobTypeId);
-				rowm.put("exitsPatrol", exitsPatrol);
-				rowm.put("patrol", patrol);
 				buffer.append("</Rows>\n");
 			}
 
@@ -303,8 +252,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 		}
 		return "success";
 	}
-	
-	
+
 	public String listDayCardJob(HttpServletRequest request,HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("listCardJob");
 		String physicalPath = request.getSession().getServletContext().getRealPath("/");
