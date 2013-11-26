@@ -58,8 +58,10 @@ public class JRUtil {
 
         for (k=0; k<colName.size(); k++) {
         	buffer.append("	<field name=\"Key" + k + "\"");
-            if (colName.get(k).indexOf("R") > 0) {
-                buffer.append(" class=\"java.lang.Double\"");
+            if (colName.get(k).indexOf("I") > 0) {
+                buffer.append(" class=\"java.lang.Integer\"");
+            } else if (colName.get(k).indexOf("R") > 0) {
+                    buffer.append(" class=\"java.lang.Double\"");
             } else {
                 buffer.append(" class=\"java.lang.String\"");
             }

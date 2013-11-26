@@ -89,7 +89,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			colName.add(value);colWidth.add(StringUtils.length(value));
 			value="操作员";
 			colName.add(value);colWidth.add(StringUtils.length(value));
-			value="巡检次数";
+			value="巡检次数I";
 			colName.add(value);colWidth.add(StringUtils.length(value));
 			
 			StringBuilder buffer = new StringBuilder();
