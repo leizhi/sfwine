@@ -27,19 +27,21 @@
 		<jsp:param name="action" value="DayCardJob.do"/>
 		<jsp:param name="method" value="listDayPatrol"/>
 	</jsp:include>
+	
 	<jsp:include page="../../incl/action.jsp">
 		<jsp:param name="type" value="print"/>
 		<jsp:param name="key" value="List"/>
 		<jsp:param name="action" value="DayCardJob.do"/>
 		<jsp:param name="aparams" value="reportName=${reportName }&reportType=pdf"/>
-		<jsp:param name="method" value="printPatrol"/>
+		<jsp:param name="method" value="printDayPatrol"/>
 	</jsp:include>
+	
 	<jsp:include page="../../incl/action.jsp">
 		<jsp:param name="type" value="export"/>
 		<jsp:param name="key" value="List"/>
 		<jsp:param name="action" value="DayCardJob.do"/>
 		<jsp:param name="aparams" value="reportName=${reportName }&reportType=xls"/>
-		<jsp:param name="method" value="exportPatrol"/>
+		<jsp:param name="method" value="exportDayPatrol"/>
 	</jsp:include>
 </div>
 

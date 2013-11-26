@@ -410,6 +410,8 @@
 		<action	name="DayCardJob" default="dayPatrol"
 			class="com.mooo.mycoz.action.operation.label.DayCardJobAction">
 			<result name="listDayPatrol">/jsp/operation/label/listDayPatrol.jsp</result>
+			<result name="exportDayPatrol">/jsp/incl/download.jsp</result>
+			<result name="printDayPatrol">/jsp/incl/download.jsp</result>
 			<result name="listDayCardJob">/jsp/operation/label/listDayCardJob.jsp</result>
 		</action>
 		

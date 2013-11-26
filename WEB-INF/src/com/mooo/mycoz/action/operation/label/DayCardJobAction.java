@@ -26,6 +26,7 @@ import com.mooo.mycoz.dbobj.wineBranch.WineJar;
 import com.mooo.mycoz.dbobj.wineBranch.Winery;
 import com.mooo.mycoz.dbobj.wineShared.JobType;
 import com.mooo.mycoz.framework.ActionSession;
+import com.mooo.mycoz.framework.component.JRExport;
 import com.mooo.mycoz.framework.component.JRUtil;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
@@ -41,7 +42,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 		String physicalPath = request.getSession().getServletContext().getRealPath("/");
 		
 		//报表参数
-		String reportName="PatrolCard";
+		String reportName="DayPatrol";
 
 		Vector<String> colName = new Vector<String>();
 		Vector<String> colSum = new Vector<String>();
@@ -76,6 +77,8 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 
 			request.setAttribute("reportName", reportName);
 
+			value="日期";
+			colName.add(value);colWidth.add(StringUtils.length(value));
 			value="酒厂";
 			colName.add(value);colWidth.add(StringUtils.length(value));
 			value="酒罐号";
@@ -84,11 +87,9 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			colName.add(value);colWidth.add(StringUtils.length(value));
 			value="位置";
 			colName.add(value);colWidth.add(StringUtils.length(value));
-			value="业务类型";
-			colName.add(value);colWidth.add(StringUtils.length(value));
 			value="操作员";
 			colName.add(value);colWidth.add(StringUtils.length(value));
-			value="业务时间";
+			value="巡检次数";
 			colName.add(value);colWidth.add(StringUtils.length(value));
 			
 			StringBuilder buffer = new StringBuilder();
@@ -186,36 +187,50 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 				Winery winery = (Winery)rowm.get("winery");
 				WineJar wineJar = (WineJar)rowm.get("wineJar");
 				Card card = (Card)rowm.get("card");
+				CardJob gCardJob = (CardJob)rowm.get("cardJob");
+				User user = (User)rowm.get("user");
 
 				//column start
-				value=winery.getEnterpriseName();
+				value=CalendarUtils.dformat(gCardJob.getJobDate());
 				if(value!=null && value.length()>colWidth.get(0)){
 					colWidth.set(0, StringUtils.length(value));
 				}
 				buffer.append("<Key0>"+value+"</Key0>\n");
-
+				
 				//column start
-				value=wineJar.getJarNumber();
+				value=winery.getEnterpriseName();
 				if(value!=null && value.length()>colWidth.get(1)){
 					colWidth.set(1, StringUtils.length(value));
 				}
 				buffer.append("<Key1>"+value+"</Key1>\n");
-				
+
 				//column start
-				value=card.getRfidcode();
+				value=wineJar.getJarNumber();
 				if(value!=null && value.length()>colWidth.get(2)){
 					colWidth.set(2, StringUtils.length(value));
 				}
 				buffer.append("<Key2>"+value+"</Key2>\n");
 				
 				//column start
-				value=card.getPosition()+"";
+				value=card.getRfidcode();
 				if(value!=null && value.length()>colWidth.get(3)){
 					colWidth.set(3, StringUtils.length(value));
 				}
 				buffer.append("<Key3>"+value+"</Key3>\n");
+				
+				//column start
+				value=card.getPosition()+"";
+				if(value!=null && value.length()>colWidth.get(4)){
+					colWidth.set(4, StringUtils.length(value));
+				}
+				buffer.append("<Key4>"+value+"</Key4>\n");
 
-				CardJob gCardJob = (CardJob)rowm.get("cardJob");
+				//column start
+				value=user.getName();
+				if(value!=null && value.length()>colWidth.get(5)){
+					colWidth.set(5, StringUtils.length(value));
+				}
+				buffer.append("<Key5>"+value+"</Key5>\n");
 				
 				CardJob cardJob = new CardJob();
 				cardJob.setCardId(card.getId());
@@ -226,6 +241,13 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 				int count = cardJob.count();
 				
 				rowm.put("countPatrol", count);
+				
+				//column start
+				value=count+"";
+				if(value!=null && value.length()>colWidth.get(6)){
+					colWidth.set(6, StringUtils.length(value));
+				}
+				buffer.append("<Key6>"+value+"</Key6>\n");
 				
 				buffer.append("</Rows>\n");
 			}
@@ -243,7 +265,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			writer.close();
 			writerStream.close();
 			
-			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "巡检明细", colName, colSum, colWidth, "/Reports/Rows");
+			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "巡检日报"+startDate+"到"+endDate, colName, colSum, colWidth, "/Reports/Rows");
 			writerStream = new FileOutputStream(filePrefix+".jrxml");
 			writer = new BufferedWriter(new OutputStreamWriter(writerStream, "UTF-8")); 
 			writer.write(jrxml.toString());
@@ -258,6 +280,14 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 		return "success";
 	}
 
+	public String exportDayPatrol(HttpServletRequest request,HttpServletResponse response) {
+		return JRExport.buildJasper(request, response);
+	}
+	
+	public String printDayPatrol(HttpServletRequest request,HttpServletResponse response) {
+		return JRExport.buildJasper(request, response);
+	}
+	
 	public String listDayCardJob(HttpServletRequest request,HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("listCardJob");
 		String physicalPath = request.getSession().getServletContext().getRealPath("/");
