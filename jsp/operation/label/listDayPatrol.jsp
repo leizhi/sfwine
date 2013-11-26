@@ -101,7 +101,7 @@
 <thead>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="7" >
+<td colspan="8" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>
@@ -113,6 +113,7 @@
 <th><fmt:message key="WineJarId"/></th>
 <th><fmt:message key="Rfidcode"/></th>
 <th><fmt:message key="Position"/></th>
+<th><fmt:message key="OperatorId"/></th>
 <th><fmt:message key="Patrol"/></th>
 </tr>
 </thead>
@@ -133,6 +134,7 @@
 <td><c:out value="${item.wineJar.jarNumber }"/></td>
 <td><c:out value="${item.card.rfidcode }"/></td>
 <td><c:out value="${item.card.position }"/></td>
+<td><c:out value="${item.user.name }"/></td>
 <td><c:out value="${item.countPatrol }"/></td>
 </tr>
 
@@ -142,7 +144,7 @@
 <tfoot>
 <!-- 分页 -->
 <tr class="lp" >
-<td colspan="7" >
+<td colspan="8" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>

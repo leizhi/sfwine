@@ -161,6 +161,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			dbobject.setRetrieveField("jobType", "id");
 			dbobject.setRetrieveField("jobType", "definition");
 			dbobject.setRetrieveField("cardJob", "jobDate");
+			dbobject.setRetrieveField("user", "name");
 
 			dbobject.setGroupBy("DATE_FORMAT(cardJob", "jobDate, '%Y-%m-%d')");
 			dbobject.setGroupBy("winery", "id");
@@ -220,7 +221,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 				cardJob.setCardId(card.getId());
 				cardJob.setBranchId(card.getBranchId());
 				cardJob.setLike("jobDate", CalendarUtils.dformat(gCardJob.getJobDate()) );
-				cardJob.setGreaterEqual("jobTypeId", 3);
+				cardJob.setJobTypeId(3);
 				
 				int count = cardJob.count();
 				
