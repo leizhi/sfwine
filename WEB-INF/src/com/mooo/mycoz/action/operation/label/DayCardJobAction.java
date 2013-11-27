@@ -51,34 +51,23 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 		String value = null;
 		try {
 			Calendar now = Calendar.getInstance();
-			Date eDate = now.getTime();
+			Date nowDate = now.getTime();
 			
-			now.add(Calendar.DAY_OF_MONTH, -1);
-			Date sDate = now.getTime();
+//			now.add(Calendar.DAY_OF_MONTH, -1);
 
-			String startDate = request.getParameter("StartDate");
-			String endDate = request.getParameter("EndDate");
+			String byDate = request.getParameter("ByDate");
 
-			if(startDate==null){
-				request.setAttribute("StartDate", sDate);
-				startDate = CalendarUtils.dformat(sDate);
+			if(byDate==null){
+				byDate = CalendarUtils.dformat(nowDate);
+				request.setAttribute("ByDate", nowDate);
 			}else{
-				request.setAttribute("StartDate", CalendarUtils.dtparse(startDate));
+				request.setAttribute("ByDate", CalendarUtils.dparse(byDate));
 			}
-			
-			if(endDate==null){
-				request.setAttribute("EndDate", eDate);
-				endDate = CalendarUtils.dformat(eDate);
-			}else{
-				request.setAttribute("EndDate", CalendarUtils.dtparse(endDate));
-			}
-			
+
 			request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId,true));
 
 			request.setAttribute("reportName", reportName);
 
-			value="日期";
-			colName.add(value);colWidth.add(StringUtils.length(value));
 			value="酒厂";
 			colName.add(value);colWidth.add(StringUtils.length(value));
 			value="酒罐号";
@@ -103,7 +92,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			dbobject.addTable(Card.class, "card");
 			dbobject.addTable(CardJob.class, "cardJob");
 
-			dbobject.addTable(User.class, "user");
+//			dbobject.addTable(User.class, "user");
 			dbobject.addTable(JobType.class, "jobType");
 
 			dbobject.setForeignKey("wineJar", "wineryId", "winery", "id");
@@ -118,19 +107,18 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			dbobject.setForeignKey("cardJob", "cardId", "card", "id");
 			dbobject.setForeignKey("cardJob", "branchId", "card", "branchId");
 			
-			dbobject.setForeignKey("cardJob", "userId","user", "id");
-			dbobject.setForeignKey("cardJob", "branchId","user", "branchId");
+//			dbobject.setForeignKey("cardJob", "userId","user", "id");
+//			dbobject.setForeignKey("cardJob", "branchId","user", "branchId");
 			
 			dbobject.setForeignKey("cardJob", "jobTypeId","jobType", "id");
 
-			dbobject.setField("jobType", "id",3);
-			dbobject.addCustomWhereClause("wineJar.stateId<>3");
+			dbobject.setField("jobType", "id",2);
+			dbobject.setNotEqual("wineJar", "stateId",3);
 			
-			if(!StringUtils.isNull(startDate))
-				dbobject.setGreaterEqual("cardJob", "jobDate", startDate);
+//			dbobject.addCustomWhereClause("wineJar.stateId<>3");
 			
-			if(!StringUtils.isNull(endDate))
-				dbobject.setLessEqual("cardJob", "jobDate", endDate);
+//			if(!StringUtils.isNull(byDate))
+//				dbobject.setLike("cardJob", "jobDate", byDate);
 			
 			value = request.getParameter("WineJar");
 			if(!StringUtils.isNull(value)){
@@ -161,15 +149,15 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			dbobject.setRetrieveField("card", "branchId");
 			dbobject.setRetrieveField("jobType", "id");
 			dbobject.setRetrieveField("jobType", "definition");
-			dbobject.setRetrieveField("cardJob", "jobDate");
-			dbobject.setRetrieveField("user", "name");
+//			dbobject.setRetrieveField("cardJob", "jobDate");
+//			dbobject.setRetrieveField("user", "name");
 
-			dbobject.setGroupBy("DATE_FORMAT(cardJob", "jobDate, '%Y-%m-%d')");
-			dbobject.setGroupBy("winery", "id");
-			dbobject.setGroupBy("wineJar", "jarNumber");
-			dbobject.setGroupBy("card", "id");
-			
-			dbobject.setOrderBy("DATE_FORMAT(cardJob", "jobDate, '%Y-%m-%d')","DESC");
+//			dbobject.setGroupBy("DATE_FORMAT(cardJob", "jobDate, '%Y-%m-%d')");
+//			dbobject.setGroupBy("winery", "id");
+//			dbobject.setGroupBy("wineJar", "jarNumber");
+//			dbobject.setGroupBy("card", "id");
+//			
+//			dbobject.setOrderBy("DATE_FORMAT(cardJob", "jobDate, '%Y-%m-%d')","DESC");
 			dbobject.setOrderBy("winery", "id");
 			dbobject.setOrderBy("wineJar", "jarNumber");
 			dbobject.setOrderBy("card", "id");
@@ -187,67 +175,76 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 				Winery winery = (Winery)rowm.get("winery");
 				WineJar wineJar = (WineJar)rowm.get("wineJar");
 				Card card = (Card)rowm.get("card");
-				CardJob gCardJob = (CardJob)rowm.get("cardJob");
-				User user = (User)rowm.get("user");
+//				CardJob gCardJob = (CardJob)rowm.get("cardJob");
+//				User user = (User)rowm.get("user");
 
 				//column start
-				value=CalendarUtils.dformat(gCardJob.getJobDate());
+				value=winery.getEnterpriseName();
 				if(value!=null && value.length()>colWidth.get(0)){
 					colWidth.set(0, StringUtils.length(value));
 				}
 				buffer.append("<Key0>"+value+"</Key0>\n");
 				
 				//column start
-				value=winery.getEnterpriseName();
+				value=wineJar.getJarNumber();
 				if(value!=null && value.length()>colWidth.get(1)){
 					colWidth.set(1, StringUtils.length(value));
 				}
 				buffer.append("<Key1>"+value+"</Key1>\n");
 
 				//column start
-				value=wineJar.getJarNumber();
+				value=card.getRfidcode();
 				if(value!=null && value.length()>colWidth.get(2)){
 					colWidth.set(2, StringUtils.length(value));
 				}
 				buffer.append("<Key2>"+value+"</Key2>\n");
 				
 				//column start
-				value=card.getRfidcode();
+				value=card.getPosition()+"";
 				if(value!=null && value.length()>colWidth.get(3)){
 					colWidth.set(3, StringUtils.length(value));
 				}
 				buffer.append("<Key3>"+value+"</Key3>\n");
 				
+
+
+				//column start		
+				CardJob cardJob = new CardJob();
+				cardJob.setCardId(card.getId());
+				cardJob.setBranchId(card.getBranchId());
+				cardJob.setJobTypeId(3);
+				cardJob.retrieve();
+				
+				User user = new User();
+				user.setId(cardJob.getUserId());
+				user.setBranchId(cardJob.getBranchId());
+				user.retrieve();
+				
+				rowm.put("patrolUser", user.getName());
+				
 				//column start
-				value=card.getPosition()+"";
+				value=user.getName();
 				if(value!=null && value.length()>colWidth.get(4)){
 					colWidth.set(4, StringUtils.length(value));
 				}
 				buffer.append("<Key4>"+value+"</Key4>\n");
-
-				//column start
-				value=user.getName();
-				if(value!=null && value.length()>colWidth.get(5)){
-					colWidth.set(5, StringUtils.length(value));
-				}
-				buffer.append("<Key5>"+value+"</Key5>\n");
 				
-				CardJob cardJob = new CardJob();
+				cardJob = new CardJob();
 				cardJob.setCardId(card.getId());
 				cardJob.setBranchId(card.getBranchId());
-				cardJob.setLike("jobDate", CalendarUtils.dformat(gCardJob.getJobDate()) );
 				cardJob.setJobTypeId(3);
-				
+				cardJob.setLike("jobDate", byDate);
+
 				int count = cardJob.count();
 				
 				rowm.put("countPatrol", count);
 				
 				//column start
 				value=count+"";
-				if(value!=null && value.length()>colWidth.get(6)){
-					colWidth.set(6, StringUtils.length(value));
+				if(value!=null && value.length()>colWidth.get(5)){
+					colWidth.set(5, StringUtils.length(value));
 				}
-				buffer.append("<Key6>"+value+"</Key6>\n");
+				buffer.append("<Key5>"+value+"</Key5>\n");
 				
 				buffer.append("</Rows>\n");
 			}
@@ -265,7 +262,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			writer.close();
 			writerStream.close();
 			
-			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "巡检日报"+startDate+"到"+endDate, colName, colSum, colWidth, "/Reports/Rows");
+			String jrxml = JRUtil.createJRXML(reportName, "原酒产业联盟", byDate+"巡检日报", colName, colSum, colWidth, "/Reports/Rows");
 			writerStream = new FileOutputStream(filePrefix+".jrxml");
 			writer = new BufferedWriter(new OutputStreamWriter(writerStream, "UTF-8")); 
 			writer.write(jrxml.toString());

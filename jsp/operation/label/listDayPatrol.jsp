@@ -59,14 +59,6 @@
 <tbody>
 
 <tr>
-	<td class="textr"><fmt:message key="StartDate"/></td>
-	<td><input type="text" name="StartDate" value="<fmt:formatDate value="${StartDate }" type="both"/>" onclick="displayCalendar(this,'yyyy-MM-dd hh:mm:ss');"/></td>
-
-	<td class="textr"><fmt:message key="EndDate"/></td>
-	<td><input type="text" name="EndDate" value="<fmt:formatDate value="${EndDate }" type="both"/>" onclick="displayCalendar(this,'yyyy-MM-dd hh:mm:ss');"/></td>
-</tr>
-
-<tr>
 	<td  class="textr"><fmt:message key="Winery"/></td>
 	<td><select name="wineryId" onchange="document.forms[0].submit();">
 			<option selected="selected" value="">All</option>
@@ -90,6 +82,14 @@
 	</td>
 </tr>
 
+<tr>
+	<td class="textr"><fmt:message key="Date"/></td>
+	<td><input type="text" name="ByDate" value="<fmt:formatDate value="${ByDate }" type="date"/>" onclick="displayCalendar(this,'yyyy-MM-dd');" size="10"/></td>
+
+	<td class="textr"></td>
+	<td></td>
+</tr>
+
 </tbody>
 </table>
 </td>
@@ -103,14 +103,13 @@
 <thead>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="8" >
+<td colspan="7" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>
 
 <tr>
 <th><fmt:message key="ID"/></th>
-<th><fmt:message key="Date"/></th>
 <th><fmt:message key="Winery"/></th>
 <th><fmt:message key="WineJarId"/></th>
 <th><fmt:message key="Rfidcode"/></th>
@@ -131,12 +130,11 @@
 	</c:url>
 	<a href="#" onclick="window.open('${listDayCardJob }'); "><fmt:message key="View"/></a>
 </td>
-<td><fmt:formatDate value="${item.cardJob.jobDate }" type="date" /></td>
 <td><c:out value="${item.winery.enterpriseName }"/></td>
 <td><c:out value="${item.wineJar.jarNumber }"/></td>
 <td><c:out value="${item.card.rfidcode }"/></td>
 <td><c:out value="${item.card.position }"/></td>
-<td><c:out value="${item.user.name }"/></td>
+<td><c:out value="${item.patrolUser }"/></td>
 <td><c:out value="${item.countPatrol }"/></td>
 </tr>
 
@@ -146,7 +144,7 @@
 <tfoot>
 <!-- 分页 -->
 <tr class="lp" >
-<td colspan="8" >
+<td colspan="7" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>
