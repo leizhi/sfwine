@@ -111,7 +111,8 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 //			dbobject.setForeignKey("cardJob", "branchId","user", "branchId");
 			
 			dbobject.setForeignKey("cardJob", "jobTypeId","jobType", "id");
-
+			
+			dbobject.setField("card", "processId",0);
 			dbobject.setField("jobType", "id",2);
 			dbobject.setNotEqual("wineJar", "stateId",3);
 			
