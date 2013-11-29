@@ -436,8 +436,8 @@ public class IDGenerator {
 			MultiDBObject dbobject = new MultiDBObject();
 			dbobject.addTable(Winery.class, "winery");
 			if (enable)
-				dbobject.setField("winery", "stateId", 2);
-
+				dbobject.addCustomWhereClause("(winery.stateId=2 OR winery.stateId=4)");
+			
 			if(StringUtils.isNull(category)) category="";
 			
 			if (category.equals("Regulators")) {
