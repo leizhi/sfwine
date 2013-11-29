@@ -9,7 +9,7 @@ public class Card extends DBObject{
 	private String rfidcode;
 	private String uuid;
 	private Integer wineryId;
-	private Integer position;
+	private String position;
 	private Integer cardTypeId;
 	private Integer processId;
 	private Integer branchId;
@@ -47,10 +47,10 @@ public class Card extends DBObject{
 		this.wineryId = wineryId;
 	}
 	
-	public Integer getPosition() {
+	public String getPosition() {
 		return position;
 	}
-	public void setPosition(Integer position) {
+	public void setPosition(String position) {
 		this.position = position;
 	}
 	

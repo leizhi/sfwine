@@ -579,7 +579,7 @@ public String processActivate(HttpServletRequest request, HttpServletResponse re
 			
 			value = request.getParameter("cardPosition"+i);
 			
-			card.setPosition(new Integer(value));
+			card.setPosition(value);
 			
 			card.update(tx.getConnection());
 

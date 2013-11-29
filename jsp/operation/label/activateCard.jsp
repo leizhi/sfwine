@@ -6,12 +6,11 @@
 <head>
 <title><fmt:message key="Card"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet">   
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
+<script type="text/javascript" src="jsp/public/skin.js"></script>
+<script type="text/javascript" src="jsp/js/calendar.js"></script>
 <script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
 <script type="text/javascript" src="jsp/js/util.js"></script>
-<link type="text/css" rel="stylesheet" href="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112" media="screen"/>
-<script type="text/javascript" src="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.js?random=20060118"></script>
-<script type="text/javascript" src="jsp/public/skin.js"></script>
 </head>
 
 <body>
@@ -60,16 +59,25 @@
 <td><fmt:message key="Position"/></td>
 <td>
 	<select name="cardPosition${status.index}">
-		<option value="1" selected="selected">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		<option value="5">5</option>
-		<option value="6">6</option>
-		<option value="7">7</option>
-		<option value="8">8</option>
-		<option value="9">9</option>
-		<option value="10">10</option>
+		<option value="D1" selected="selected">D1</option>
+		<option value="D2">D2</option>
+		<option value="上">上</option>
+		<option value="下">下</option>
+		<option value="左">左</option>
+		<option value="右">右</option>
+		<option value="中">中</option>
+		<option value="J1">J1</option>
+		<option value="J2">J2</option>
+		<option value="J3">J3</option>
+		<option value="J4">J4</option>
+		<option value="J5">J5</option>
+		<option value="J6">J6</option>
+		<option value="C1">C1</option>
+		<option value="C2">C2</option>
+		<option value="C3">C3</option>
+		<option value="C4">C4</option>
+		<option value="C5">C5</option>
+		<option value="C6">C6</option>
 	</select>
 </td>
 
