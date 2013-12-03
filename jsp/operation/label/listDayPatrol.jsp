@@ -84,7 +84,7 @@
 
 <tr>
 	<td class="textr"><fmt:message key="Date"/></td>
-	<td><input type="text" name="ByDate" value="<fmt:formatDate value="${ByDate }" type="date"/>" onclick="displayCalendar(this,'yyyy-MM-dd');" size="10"/></td>
+	<td><input type="text" name="ByDate" value="<fmt:formatDate value="${ByDate }" pattern="yyyy-MM-dd" />" onclick="displayCalendar(this,'yyyy-MM-dd');" size="10"/></td>
 
 	<td class="textr"></td>
 	<td></td>
