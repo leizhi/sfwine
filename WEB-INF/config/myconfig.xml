@@ -393,6 +393,7 @@
 			<result name="chooseWinery">/jsp/operation/label/choolseWinery.jsp</result>
 			<result name="promptActivate">/jsp/operation/label/activateCard.jsp</result>
 			<result name="processActivate"></result>
+			<result name="processCanceled"></result>
 		</action>
 		
 		<!-- CardJob -->
@@ -413,6 +414,7 @@
 			<result name="exportDayPatrol">/jsp/incl/download.jsp</result>
 			<result name="printDayPatrol">/jsp/incl/download.jsp</result>
 			<result name="listDayCardJob">/jsp/operation/label/listDayCardJob.jsp</result>
+			<result name="processCanceled"></result>
 		</action>
 		
 		<!-- Report -->

@@ -64,6 +64,12 @@
 		<jsp:param name="action" value="Card.do"/>
 		<jsp:param name="method" value="chooseWinery"/>
 	</jsp:include>
+	
+	<jsp:include page="../../incl/actionb.jsp">
+		<jsp:param name="key" value="Canceled"/>
+		<jsp:param name="action" value="Card.do"/>
+		<jsp:param name="method" value="processCanceled"/>
+	</jsp:include>
 </div>
 
 <div id="container">
@@ -157,6 +163,7 @@
 <th><fmt:message key="OperatingTime"/></th>
 <th><fmt:message key="CardType"/></th>
 <th><fmt:message key="Rfidcode"/></th>
+<th><fmt:message key="Position"/></th>
 <th><fmt:message key="Uuid"/></th>
 </tr>
 </thead>
@@ -177,6 +184,7 @@
 <td><fmt:formatDate value="${item.cardJob.jobDate }" type="both" /></td>
 <td><c:out value="${item.cardType.cardTypeName }"/></td>
 <td><c:out value="${item.card.rfidcode }"/></td>
+<td><c:out value="${item.card.position }"/></td>
 <td><c:out value="${item.card.uuid }"/></td>
 </tr>
 </c:forEach>

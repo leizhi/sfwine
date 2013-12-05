@@ -45,46 +45,42 @@
 
 <tr>
 <td class="tl"><fmt:message key="Winery"/></td>
-<td>
-<select name="card.wineryId">
-	<c:forEach var="items" items="${winerys}" varStatus="s">
-		<option value="${items.winery.id}"
-
-		<c:if test="${items.winery.id==card.wineryId}">
-			selected="selected"
-		</c:if>
-			>
-		${items.winery.enterpriseName}
-		</option>
-	--</c:forEach>
-</select>
-</td>
+<td>:${winery.enterpriseName}</td>
 </tr>
 
 <tr>
 <td class="tl"><fmt:message key="Rfidcode"/></td>
-<td><input type="text" name="card.rfidcode" value="${card.rfidcode }"/></td>
+<td>:${card.rfidcode }</td>
 </tr>
 
 <tr>
 <td class="tl"><fmt:message key="Uuid"/></td>
-<td><input type="text" name="card.uuid" value="${card.uuid }"/></td>
+<td>:${card.uuid }</td>
 </tr>
 
 <tr>
 <td class="tl"><fmt:message key="Position"/></td>
 <td>
-	<select name="card.position">
-		<option value="1" <c:if test="${card.position=='1'}">selected="selected"</c:if>>1</option>
-		<option value="2" <c:if test="${card.position=='2'}">selected="selected"</c:if>>2</option>
-		<option value="3" <c:if test="${card.position=='3'}">selected="selected"</c:if>>3</option>
-		<option value="4" <c:if test="${card.position=='4'}">selected="selected"</c:if>>4</option>
-		<option value="5" <c:if test="${card.position=='5'}">selected="selected"</c:if>>5</option>
-		<option value="6" <c:if test="${card.position=='6'}">selected="selected"</c:if>>6</option>
-		<option value="7" <c:if test="${card.position=='7'}">selected="selected"</c:if>>7</option>
-		<option value="8" <c:if test="${card.position=='8'}">selected="selected"</c:if>>8</option>
-		<option value="9" <c:if test="${card.position=='9'}">selected="selected"</c:if>>9</option>
-		<option value="10" <c:if test="${card.position=='10'}">selected="selected"</c:if>>10</option>
+<select name="card.position">
+		<option value="D1"  <c:if test="${card.position=='D1'}">selected="selected"</c:if>>D1</option>
+		<option value="D2" <c:if test="${card.position=='D2'}">selected="selected"</c:if>>D2</option>
+		<option value="上" <c:if test="${card.position=='上'}">selected="selected"</c:if>>上</option>
+		<option value="下" <c:if test="${card.position=='下'}">selected="selected"</c:if>>下</option>
+		<option value="左" <c:if test="${card.position=='左'}">selected="selected"</c:if>>左</option>
+		<option value="右" <c:if test="${card.position=='右'}">selected="selected"</c:if>>右</option>
+		<option value="中" <c:if test="${card.position=='中'}">selected="selected"</c:if>>中</option>
+		<option value="J1" <c:if test="${card.position=='J1'}">selected="selected"</c:if>>J1</option>
+		<option value="J2" <c:if test="${card.position=='J2'}">selected="selected"</c:if>>J2</option>
+		<option value="J3" <c:if test="${card.position=='J3'}">selected="selected"</c:if>>J3</option>
+		<option value="J4" <c:if test="${card.position=='J4'}">selected="selected"</c:if>>J4</option>
+		<option value="J5" <c:if test="${card.position=='J5'}">selected="selected"</c:if>>J5</option>
+		<option value="J6" <c:if test="${card.position=='J6'}">selected="selected"</c:if>>J6</option>
+		<option value="C1" <c:if test="${card.position=='C1'}">selected="selected"</c:if>>C1</option>
+		<option value="C2" <c:if test="${card.position=='C2'}">selected="selected"</c:if>>C2</option>
+		<option value="C3" <c:if test="${card.position=='C3'}">selected="selected"</c:if>>C3</option>
+		<option value="C4" <c:if test="${card.position=='C4'}">selected="selected"</c:if>>C4</option>
+		<option value="C5" <c:if test="${card.position=='C5'}">selected="selected"</c:if>>C5</option>
+		<option value="C6" <c:if test="${card.position=='C6'}">selected="selected"</c:if>>C6</option>
 	</select>
 </td>
 </tr>

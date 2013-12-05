@@ -19,6 +19,7 @@ import com.mooo.mycoz.action.BaseSupport;
 import com.mooo.mycoz.common.CalendarUtils;
 import com.mooo.mycoz.common.StringUtils;
 import com.mooo.mycoz.db.MultiDBObject;
+import com.mooo.mycoz.db.Transaction;
 import com.mooo.mycoz.dbobj.wineBranch.Card;
 import com.mooo.mycoz.dbobj.wineBranch.CardJob;
 import com.mooo.mycoz.dbobj.wineBranch.User;
@@ -30,6 +31,7 @@ import com.mooo.mycoz.framework.component.JRExport;
 import com.mooo.mycoz.framework.component.JRUtil;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
+import com.mooo.mycoz.framework.util.ParamUtil;
 
 public class DayCardJobAction extends BaseSupport {
 
@@ -113,7 +115,11 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			dbobject.setForeignKey("cardJob", "jobTypeId","jobType", "id");
 			
 			dbobject.setField("card", "processId",0);
-			dbobject.setField("jobType", "id",2);
+			dbobject.setField("cardJob", "processId",0);
+
+			dbobject.setGreater("jobType", "id",1);
+			dbobject.setNotEqual("jobType", "id",11);
+
 			dbobject.setNotEqual("wineJar", "stateId",3);
 			
 //			dbobject.addCustomWhereClause("wineJar.stateId<>3");
@@ -140,6 +146,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 					dbobject.addCustomWhereClause(" winery.id IN (" + wineryValues+")");
 				dbobject.setField("winery", "branchId",branchId);
 			}
+			dbobject.setGroupBy("card", "id");
 			
 			dbobject.setRetrieveField("winery", "enterpriseName");
 			dbobject.setRetrieveField("card", "rfidcode");
@@ -462,5 +469,59 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			request.setAttribute("error", e.getMessage());
 		}
 		return "success";
+	}
+	
+	public String processCanceled(HttpServletRequest request, HttpServletResponse response) {
+		if (log.isDebugEnabled())log.debug("processActivate");
+		Integer branchId = ActionSession.getInteger(request, ActionSession.BRANCH_SESSION_KEY);
+		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
+
+		Transaction tx=new Transaction();
+		try {
+			tx.start();
+			
+			String[] ids =  request.getParameterValues("id");
+			
+			if(ids==null || ids.length==0)
+				throw new Exception("Please select delete object");
+			
+			for(int i=0;i<ids.length;i++){
+				
+				Card card = new Card();
+				card.setId(new Integer(ids[i]));
+				card.retrieve(tx.getConnection());
+
+				CardJob cardJob = new CardJob();
+				cardJob.setCardId(card.getId());
+				cardJob.setBranchId(branchId);
+
+				int processId = cardJob.count(tx.getConnection());
+				cardJob.setProcessId(0);
+				cardJob.retrieve(tx.getConnection());
+
+				cardJob.setProcessId(processId);
+				cardJob.update(tx.getConnection());
+				
+				ParamUtil.bindData(request, cardJob,"cardJob");
+				int cardJobId = IDGenerator.getNextID(tx.getConnection(),CardJob.class);
+				cardJob.setId(cardJobId);
+				cardJob.setUserId(sessionId);
+				cardJob.setJobDate(new Date());
+				cardJob.setSpotNormal("Y");
+				cardJob.setCardNormal("Y");
+				cardJob.setProcessId(0);
+				cardJob.setJobTypeId(11);
+				cardJob.add(tx.getConnection());
+			}
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
+			request.setAttribute("error", e.getMessage());
+			
+		} finally {
+			tx.end();
+		}
+		return "listDayPatrol";
 	}
 }

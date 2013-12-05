@@ -43,6 +43,12 @@
 		<jsp:param name="aparams" value="reportName=${reportName }&reportType=xls"/>
 		<jsp:param name="method" value="exportDayPatrol"/>
 	</jsp:include>
+	
+	<jsp:include page="../../incl/actionb.jsp">
+		<jsp:param name="key" value="Canceled"/>
+		<jsp:param name="action" value="DayCardJob.do"/>
+		<jsp:param name="method" value="processCanceled"/>
+	</jsp:include>
 </div>
 
 <div id="container">
@@ -122,14 +128,14 @@
 <tbody>
 <c:forEach var="item" items="${cards}" varStatus="status">
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
-
-<td>
+<td><input type="checkbox" name="id" value="${item.card.id }">
 	<c:url value="/DayCardJob.do" var="listDayCardJob">
 		<c:param name="method">listDayCardJob</c:param>
 		<c:param name="cardId">${item.card.id }</c:param>
 	</c:url>
 	<a href="#" onclick="window.open('${listDayCardJob }'); "><fmt:message key="View"/></a>
 </td>
+
 <td><c:out value="${item.winery.enterpriseName }"/></td>
 <td><c:out value="${item.wineJar.jarNumber }"/></td>
 <td><c:out value="${item.card.rfidcode }"/></td>

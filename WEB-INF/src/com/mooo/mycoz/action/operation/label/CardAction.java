@@ -161,6 +161,7 @@ private static Log log = LogFactory.getLog(CardAction.class);
 			dbobject.setRetrieveField("card", "id");
 			dbobject.setRetrieveField("card", "rfidcode");
 			dbobject.setRetrieveField("card", "uuid");
+			dbobject.setRetrieveField("card", "position");
 			dbobject.setRetrieveField("card", "wineJarId");
 
 			dbobject.setRetrieveField("winery", "enterpriseName");
@@ -388,8 +389,13 @@ private static Log log = LogFactory.getLog(CardAction.class);
 				
 				request.setAttribute("card", card);
 				
-				request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId));
+				Winery winery = new Winery();
+				winery.setId(card.getWineryId());
+				winery.setBranchId(card.getBranchId());
+				winery.retrieve();
 				
+				request.setAttribute("winery", winery);
+
 				MultiDBObject dbobject = new MultiDBObject();
 				dbobject.addTable(WineJar.class, "wineJar");
 				dbobject.addTable(Winery.class, "winery");
@@ -398,6 +404,7 @@ private static Log log = LogFactory.getLog(CardAction.class);
 				dbobject.setForeignKey("wineJar", "branchId", "winery", "branchId");
 				
 				dbobject.setGreater("wineJar","id", 0);
+				dbobject.setField("winery", "id", winery.getId());
 				
 				String value = ActionSession.getWineryValues(request);
 
@@ -612,6 +619,60 @@ public String processActivate(HttpServletRequest request, HttpServletResponse re
 		request.setAttribute("error", e.getMessage());
 		
 		return "promptActivate";
+	} finally {
+		tx.end();
+	}
+	return "listCard";
+}
+
+public String processCanceled(HttpServletRequest request, HttpServletResponse response) {
+	if (log.isDebugEnabled())log.debug("processActivate");
+	Integer branchId = ActionSession.getInteger(request, ActionSession.BRANCH_SESSION_KEY);
+	Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
+
+	Transaction tx=new Transaction();
+	try {
+		tx.start();
+		
+		String[] ids =  request.getParameterValues("id");
+		
+		if(ids==null || ids.length==0)
+			throw new Exception("Please select delete object");
+		
+		for(int i=0;i<ids.length;i++){
+			
+			Card card = new Card();
+			card.setId(new Integer(ids[i]));
+			card.retrieve(tx.getConnection());
+
+			CardJob cardJob = new CardJob();
+			cardJob.setCardId(card.getId());
+			cardJob.setBranchId(branchId);
+
+			int processId = cardJob.count(tx.getConnection());
+			cardJob.setProcessId(0);
+			cardJob.retrieve(tx.getConnection());
+
+			cardJob.setProcessId(processId);
+			cardJob.update(tx.getConnection());
+			
+			ParamUtil.bindData(request, cardJob,"cardJob");
+			int cardJobId = IDGenerator.getNextID(tx.getConnection(),CardJob.class);
+			cardJob.setId(cardJobId);
+			cardJob.setUserId(sessionId);
+			cardJob.setJobDate(new Date());
+			cardJob.setSpotNormal("Y");
+			cardJob.setCardNormal("Y");
+			cardJob.setProcessId(0);
+			cardJob.setJobTypeId(11);
+			cardJob.add(tx.getConnection());
+		}
+		tx.commit();
+	} catch (Exception e) {
+		tx.rollback();
+		if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
+		request.setAttribute("error", e.getMessage());
+		
 	} finally {
 		tx.end();
 	}
