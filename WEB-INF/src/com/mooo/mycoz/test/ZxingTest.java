@@ -111,29 +111,31 @@ public class ZxingTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String imgPath = "michael_zxing.png";
-		String contents = "Hello Michael(大大),welcome to Zxing!"
-				+ "\nMichael’s blog [ http://sjsky.iteye.com ]"
-				+ "\nEMail [ sjsky007@gmail.com ]" + "\nTwitter [ @suncto ]";
-		int width = 200, height = 200;
+		int width = 500, height = 500;
 		
-		ZxingTest handler = new ZxingTest();
-		handler.codingQRCode(contents, width, height, imgPath);
-		System.out.println("Michael ,you have finished zxing encode.");
-		
-		contents="宝贝生日快乐!";
-			String buf;
+		String contents="BEGIN:VCARD\n"+
+			"VERSION:3.0\n"+
+			"N:陈季平\n"+
+			"TEL;CELL;VOICE:15201280000\n"+
+			"TEL;WORK;VOICE:010-62100000\n"+
+			"TEL;WORK;FAX:010-62100001\n"+
+			"EMAIL;PREF;INTERNET:lzw#lzw.me\n"+
+			"URL:http://lzw.me\n"+
+			"orG:志文工作室\n"+
+			"ROLE:产品部\n"+
+			"TITLE:CTO\n"+
+			"ADR;WORK;POSTAL:北京市朝阳区北四环中路35号;100101\n"+
+			"REV:2012-12-27T08:30:02Z\n"+
+			"END:VCARD";
 			try {
-				buf = new String(contents.getBytes("UTF-8"),"ISO-8859-1");
-				handler.codingQRCode(buf, width, height, "/home/zlei/hday1.png");
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
+				ZxingTest handler = new ZxingTest();
+//				String buf = new String(contents.getBytes("UTF-8"),"ISO-8859-1");
+//				String buf = contents;
+				handler.codingQRCode(contents, width, height, "/home/zlei/hday1.png");
+				if(log.isDebugEnabled())log.debug(contents);
+				
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-        String decodeContent = handler.decodeQRCode(imgPath);
-        System.out.println("解码内容如下：");
-        System.out.println(decodeContent);
-        System.out.println("Michael ,you have finished zxing decode."); 
-        if (log.isDebugEnabled()) log.debug("Michael ,you have finished zxing decode.");  
 	}
 }
