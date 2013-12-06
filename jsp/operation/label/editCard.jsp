@@ -103,6 +103,11 @@
 </td>
 </tr>
 
+<tr>
+<td class="tl"><fmt:message key="Remark"/></td>
+<td><input type="text" name="card.remark" value="${card.remark}"/></td>
+</tr>
+
 </tbody>
 
 </table>

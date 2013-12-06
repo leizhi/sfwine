@@ -2,12 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/jsp/incl/static.inc"%>
 <fmt:bundle basename="MessageBundle">
-
 <html>
 <head>
-<title><fmt:message key="Card"/></title>
+<title><fmt:message key="DayPartrol"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
 <script type="text/javascript" src="jsp/js/calendar.js"></script>
 <script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
@@ -109,7 +108,7 @@
 <thead>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="7" >
+<td colspan="8" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>
@@ -122,6 +121,7 @@
 <th><fmt:message key="Position"/></th>
 <th><fmt:message key="OperatorId"/></th>
 <th><fmt:message key="Patrol"/></th>
+<th><fmt:message key="Remark"/></th>
 </tr>
 </thead>
 
@@ -142,6 +142,7 @@
 <td><c:out value="${item.card.position }"/></td>
 <td><c:out value="${item.patrolUser }"/></td>
 <td><c:out value="${item.countPatrol }"/></td>
+<td><c:out value="${item.card.remark }"/></td>
 </tr>
 
 </c:forEach>
@@ -150,7 +151,7 @@
 <tfoot>
 <!-- 分页 -->
 <tr class="lp" >
-<td colspan="7" >
+<td colspan="8" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>

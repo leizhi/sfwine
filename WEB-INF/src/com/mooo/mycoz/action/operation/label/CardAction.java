@@ -163,7 +163,8 @@ private static Log log = LogFactory.getLog(CardAction.class);
 			dbobject.setRetrieveField("card", "uuid");
 			dbobject.setRetrieveField("card", "position");
 			dbobject.setRetrieveField("card", "wineJarId");
-
+			dbobject.setRetrieveField("card", "remark");
+			
 			dbobject.setRetrieveField("winery", "enterpriseName");
 			dbobject.setRetrieveField("jobType", "definition");
 			
@@ -376,7 +377,7 @@ private static Log log = LogFactory.getLog(CardAction.class);
 	
 	public String promptEdit(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("promptEdit");
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
+//		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 		try {
 				String id =  request.getParameter("id");
 

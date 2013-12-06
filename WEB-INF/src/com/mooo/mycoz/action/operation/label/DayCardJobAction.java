@@ -151,6 +151,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			dbobject.setRetrieveField("winery", "enterpriseName");
 			dbobject.setRetrieveField("card", "rfidcode");
 			dbobject.setRetrieveField("card", "position");
+			dbobject.setRetrieveField("card", "remark");
 			dbobject.setRetrieveField("wineJar", "jarNumber");
 			dbobject.setRetrieveField("wineJar", "id");
 			dbobject.setRetrieveField("card", "id");

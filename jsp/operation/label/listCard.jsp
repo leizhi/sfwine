@@ -150,7 +150,7 @@
 <thead>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="9" >
+<td colspan="10" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>
@@ -165,6 +165,7 @@
 <th><fmt:message key="Rfidcode"/></th>
 <th><fmt:message key="Position"/></th>
 <th><fmt:message key="Uuid"/></th>
+<th><fmt:message key="Remark"/></th>
 </tr>
 </thead>
 
@@ -186,6 +187,7 @@
 <td><c:out value="${item.card.rfidcode }"/></td>
 <td><c:out value="${item.card.position }"/></td>
 <td><c:out value="${item.card.uuid }"/></td>
+<td><c:out value="${item.card.remark }"/></td>
 </tr>
 </c:forEach>
 </tbody>
@@ -193,7 +195,7 @@
 <tfoot>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="9" >
+<td colspan="10" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>

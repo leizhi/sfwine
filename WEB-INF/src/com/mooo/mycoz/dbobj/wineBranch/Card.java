@@ -13,7 +13,8 @@ public class Card extends DBObject{
 	private Integer cardTypeId;
 	private Integer processId;
 	private Integer branchId;
-
+	private String remark;
+	
 	public Integer getId() {
 	return id;
 	}
@@ -71,6 +72,13 @@ public class Card extends DBObject{
 	}
 	public void setBranchId(Integer branchId) {
 		this.branchId = branchId;
+	}
+	
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 	//Extension methods

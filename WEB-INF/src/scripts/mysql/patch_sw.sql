@@ -840,7 +840,6 @@ GROUP BY DATE_FORMAT( cardJob.jobDate, "%Y-%m-%d"),winery.id,wineJar.jarNumber,c
 
 select * from CardJob GROUP BY DATE_FORMAT( cardJob.jobDate, "%Y-%m-%d");
 
-
 alter table Card change  `position` `position` varchar(2) DEFAULT NULL;
 update Card set position='D1' where position='1';
 update Card set position='上' where position='5';
@@ -848,3 +847,5 @@ update Card set position='下' where position='6';
 update Card set position='左' where position='7';
 update Card set position='右' where position='8';
 update Card set position='中' where position='9';
+
+alter table Card add  `remark` varchar(64) DEFAULT NULL;
