@@ -42,6 +42,7 @@
 	Action operation = new Action(sessionId,"Operation", "Operation.do");
 	operation.addChildAction(new Action(sessionId,"WineryManage","Winery.do"));
 	operation.addChildAction(new Action(sessionId,"WineJarManage","WineJar.do"));
+	operation.addChildAction(new Action(sessionId,"WineJarManage","WineJar.do","listLowWineJar"));
 	operation.addChildAction(new Action(sessionId,"CardManage","Card.do"));
 	operation.addChildAction(new Action(sessionId,"CardJob","CardJob.do","listCardJob"));
 	operation.addChildAction(new Action(sessionId,"DayPatrol","DayCardJob.do","listDayPatrol"));

@@ -376,6 +376,7 @@
 			<result name="export"></result>
 			<result name="print"></result>
 			<result name="disableWineJar"></result>
+			<result name="listLowWineJar">/jsp/operation/label/listLowWineJar.jsp</result>
 		</action>
 
 		<!-- Card -->

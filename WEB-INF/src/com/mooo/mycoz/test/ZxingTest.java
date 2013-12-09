@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -111,22 +110,35 @@ public class ZxingTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int width = 500, height = 500;
-		
+		int width = 384, height = 384;
+		width = 256;height = 256;
 		String contents="BEGIN:VCARD\n"+
 			"VERSION:3.0\n"+
 			"N:陈季平\n"+
-			"TEL;CELL;VOICE:15201280000\n"+
-			"TEL;WORK;VOICE:010-62100000\n"+
-			"TEL;WORK;FAX:010-62100001\n"+
-			"EMAIL;PREF;INTERNET:lzw#lzw.me\n"+
-			"URL:http://lzw.me\n"+
-			"orG:志文工作室\n"+
-			"ROLE:产品部\n"+
-			"TITLE:CTO\n"+
-			"ADR;WORK;POSTAL:北京市朝阳区北四环中路35号;100101\n"+
-			"REV:2012-12-27T08:30:02Z\n"+
+			"EMAIL:510572722@qq.com\n"+
+			"TEL;TYPE=VOICE,MSG,WORK:028-85936684\n"+
+			"TEL;TYPE=FAX,WORK:028-85936645\n"+
+			"TEL;CELL:13308081698\n"+
+			"ADR:成都市锦江工业园区锦盛路佳霖科创大厦5-1\n"+
+			"ORG:四川源酒投资咨询有限公司\n"+
+			"ORG:四川源酒商贸有限公司\n"+
+			"ORG:四川源酒网路科技有限公司\n"+
+			"TITLE:董事长\n"+
+			"URL:www.y9jy.com\n"+
 			"END:VCARD";
+		
+		contents="BEGIN:VCARD\n"+
+				"VERSION:3.0\n"+
+				"N:陈季平\n"+
+				"EMAIL:510572722@qq.com\n"+
+				"TEL;TYPE=VOICE,MSG,WORK:028-86129211\n"+
+				//"TEL;TYPE=FAX,WORK:028-85936645\n"+
+				"TEL;CELL:13308081698\n"+
+				"ADR:成都市东城根南街30号（食品大楼2楼）\n"+
+				"ORG:四川省酿酒研究所政银企联络办\n"+
+				"TITLE:主任\n"+
+				"URL:www.scy9.com\n"+
+				"END:VCARD";
 			try {
 				ZxingTest handler = new ZxingTest();
 //				String buf = new String(contents.getBytes("UTF-8"),"ISO-8859-1");

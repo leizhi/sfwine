@@ -332,6 +332,11 @@ private static Log log = LogFactory.getLog(WineJarAction.class);
 		return "success";
 	}
 
+	public String listLowWineJar(HttpServletRequest request, HttpServletResponse response) {
+		listWineJar(request,response);
+		return "success";
+	}
+	
 	public String export(HttpServletRequest request,HttpServletResponse response) {
 		return JRExport.buildJasper(request, response);
 	}
