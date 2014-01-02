@@ -95,7 +95,7 @@ public class Page {
 		offset = (currentPage - 1) * pageSize;
 
 		// 获取当前执行的方法，首页，前一页，后一页，尾页.
-		System.out.println("forward=>"+forward);
+		if (log.isDebugEnabled()) log.debug("forward=>"+forward);
 		if (forward != null) {
 			if (forward.equals("<<")) {
 				first();
@@ -135,10 +135,10 @@ public class Page {
 		}
 		offset = (currentPage - 1) * pageSize;
 		
-		System.out.println("currentPage=>"+currentPage);
-		System.out.println("totalPages=>"+totalPages);
-		System.out.println("pageSize=>"+pageSize);
-		System.out.println("offset=>"+offset);
+		if (log.isDebugEnabled()) log.debug("currentPage=>"+currentPage);
+		if (log.isDebugEnabled()) log.debug("totalPages=>"+totalPages);
+		if (log.isDebugEnabled()) log.debug("pageSize=>"+pageSize);
+		if (log.isDebugEnabled()) log.debug("offset=>"+offset);
 
 	}
 

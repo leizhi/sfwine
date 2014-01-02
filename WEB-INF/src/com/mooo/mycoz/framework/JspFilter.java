@@ -15,7 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class JspFilter implements Filter {
+
+	private static Log log = LogFactory.getLog(JspFilter.class);
 
 	private static ActionConfigure conf;
 
@@ -46,7 +51,7 @@ public class JspFilter implements Filter {
 				boolean isJsp = m.find();
 				
 				boolean isAuthenticated = true;
-				System.out.println("Jsp EnableAuth:"+conf.isEnableAuth());
+				if (log.isDebugEnabled()) log.debug("Jsp EnableAuth:"+conf.isEnableAuth());
 
 				//check sample action for configure
 				if(conf.isEnableAuth()){
@@ -54,12 +59,12 @@ public class JspFilter implements Filter {
 					Integer userId = (Integer) session.getAttribute(ActionSession.USER_SESSION_KEY);
 					isAuthenticated = (null != userId && userId >0);
 					
-					System.out.println("--------Jsp filter start-------------");
-					System.out.println("Jsp filter contextPath:" + contextPath);
-					System.out.println("Jsp filter accessPath:" + accessPath);
-					System.out.println("Jsp filter execPath:" + ActionUtil.execPath(accessPath));
-					System.out.println("Jsp filter isJsp:" + isJsp);
-					System.out.println("--------Jsp filter end-------------");
+					if (log.isDebugEnabled()) log.debug("--------Jsp filter start-------------");
+					if (log.isDebugEnabled()) log.debug("Jsp filter contextPath:" + contextPath);
+					if (log.isDebugEnabled()) log.debug("Jsp filter accessPath:" + accessPath);
+					if (log.isDebugEnabled()) log.debug("Jsp filter execPath:" + ActionUtil.execPath(accessPath));
+					if (log.isDebugEnabled()) log.debug("Jsp filter isJsp:" + isJsp);
+					if (log.isDebugEnabled()) log.debug("--------Jsp filter end-------------");
 				}
 				
 				if (!isAuthenticated) {
@@ -75,7 +80,7 @@ public class JspFilter implements Filter {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("Exception:" + e.getMessage());
+			if (log.isDebugEnabled()) log.debug("Exception:" + e.getMessage());
 			e.printStackTrace();
 		} finally {
 			request.setCharacterEncoding("UTF-8");
