@@ -95,7 +95,7 @@ public class ActionFilter implements Filter {
 		response.setContentType("text/html; charset=utf-8");
 		
 		try {
-			System.out.println("Actiong filter start");
+			if (log.isDebugEnabled()) log.debug("Actiong filter start");
 
 			if (request instanceof HttpServletRequest) {
 
@@ -215,8 +215,8 @@ public class ActionFilter implements Filter {
 						method = cls.getMethod(execMethod, paraTypes);
 						resultMethod = (String) method.invoke(obj, paraValues);
 	
-						System.out.println("execMethod->"+execMethod);
-						System.out.println("resultMethod->"+resultMethod);
+						if (log.isDebugEnabled()) log.debug("execMethod->"+execMethod);
+						if (log.isDebugEnabled()) log.debug("resultMethod->"+resultMethod);
 	
 						if(resultMethod.equals("success"))
 							execResult = results.get(execMethod).getForwardPath();
@@ -225,7 +225,7 @@ public class ActionFilter implements Filter {
 					}
 					
 					if(StringUtils.checkString(execResult, "\\.jsp")){// is jsp
-						System.out.println("execResult:"+execResult);
+						if (log.isDebugEnabled()) log.debug("execResult:"+execResult);
 						hRequest.getRequestDispatcher(execResult).forward(request,response);
 					} else if(StringUtils.checkString(execResult, "\\.do")){// is action
 						hResponse.sendRedirect(contextPath+execResult);
@@ -251,6 +251,6 @@ public class ActionFilter implements Filter {
 			if(log.isErrorEnabled()) log.error("Throwable:"+e.getMessage());
 			e.printStackTrace();
 		}
-		System.out.println("Actiong filter end");
+		if (log.isDebugEnabled()) log.debug("Actiong filter end");
 	}
 }

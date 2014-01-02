@@ -55,7 +55,7 @@ public class ParamUtil {
 	
 					value = value.trim();
 					
-					System.out.println("ParamUtil:"+name + "->" + value);
+					if (log.isDebugEnabled()) log.debug("ParamUtil:"+name + "->" + value);
 
 					if (name.indexOf(".") > -1) {
 						int start = name.indexOf(".");
@@ -103,7 +103,7 @@ public class ParamUtil {
 					}
 	
 					value = value.trim();
-					System.out.println("ParamUtil:"+name + "->" + value);
+					if (log.isDebugEnabled()) log.debug("ParamUtil:"+name + "->" + value);
 	
 					if (name.indexOf(".") > -1) {
 						int start = name.indexOf(".");
