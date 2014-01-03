@@ -141,7 +141,7 @@ public class UploadFile {
                             	}
                             
                             al.add(value);
-                            System.out.println(value);
+                            if (log.isDebugEnabled()) log.debug(value);
                             paramHt.put(name, al);
                         }
                     }
@@ -210,7 +210,7 @@ public class UploadFile {
                         bos.write(buffs, 0, rtnPos);
                         baos.flush();
                     } else {
-                        System.out.println("test :" + value + "--" + strBuff);
+                        if (log.isDebugEnabled()) log.debug("test :" + value + "--" + strBuff);
                         value = value + strBuff;
                     }
                 }
@@ -285,7 +285,7 @@ public class UploadFile {
 	
 					value = value.trim();
 					
-					System.out.println("ParamUtil:"+name + "->" + value);
+					if (log.isDebugEnabled()) log.debug("ParamUtil:"+name + "->" + value);
 
 					if (name.indexOf(".") > -1) {
 						int start = name.indexOf(".");
