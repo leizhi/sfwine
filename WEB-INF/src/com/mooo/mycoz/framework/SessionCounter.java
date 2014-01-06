@@ -36,7 +36,7 @@ public class SessionCounter implements HttpSessionListener {
 			
 			if (log.isDebugEnabled()) log.debug("sessionDestroyed datetime = " + (lastAccessedTime-creationTime));
 
-			if((lastAccessedTime-creationTime)>0 && onlineId!=null){
+			if(onlineId!=null){
 				AccessLog al = new AccessLog();
 				al.setId(onlineId);
 				al.setLogoutTime(new Date(lastAccessedTime));
