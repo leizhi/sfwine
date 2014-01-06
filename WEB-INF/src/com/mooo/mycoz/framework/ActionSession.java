@@ -22,7 +22,8 @@ public class ActionSession {
 	public static final String BRANCH_SESSION_KEY = "BranchId";
 	public static final String USER_NAME_KEY = "UserName";
 	public static final String IP = "IP";
-	
+	public static final String USER_ONLINE_KEY = "UserOnlineKey";
+
 	public static String getSession(HttpServletRequest request,String key){
 		return (String)request.getSession().getAttribute(key);
 	}

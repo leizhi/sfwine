@@ -18,7 +18,7 @@ public class SessionCounter implements HttpSessionListener {
 	private static int activeSessions = 0;
 
 	public void sessionCreated(HttpSessionEvent event) {
-		//activeSessions++;
+		activeSessions++;
 	}
 
 	public void sessionDestroyed(HttpSessionEvent event) {
@@ -26,18 +26,22 @@ public class SessionCounter implements HttpSessionListener {
 			activeSessions--;
 		
 		HttpSession session = event.getSession();
-		String ip = (String) session.getAttribute(ActionSession.IP);
 		
+		Integer onlineId = (Integer) session.getAttribute(ActionSession.USER_ONLINE_KEY);
+
 		try {
-			if (log.isDebugEnabled()) log.debug("sessionDestroyed datetime = " + (session.getLastAccessedTime()-session.getCreationTime()));
+			long creationTime = session.getCreationTime();
+			
+			long lastAccessedTime = session.getLastAccessedTime();
+			
+			if (log.isDebugEnabled()) log.debug("sessionDestroyed datetime = " + (lastAccessedTime-creationTime));
 
-			AccessLog al = new AccessLog();
-			al.setIp(ip);
-			al.setStartdate(new Date(session.getCreationTime()));
-
-			al.retrieve();
-			al.setEnddate(new Date(session.getLastAccessedTime()));
-			al.update();
+			if((lastAccessedTime-creationTime)>0 && onlineId!=null){
+				AccessLog al = new AccessLog();
+				al.setId(onlineId);
+				al.setLogoutTime(new Date(lastAccessedTime));
+				al.update();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			if (log.isDebugEnabled()) log.debug("SQLException: "+e.getMessage());
@@ -49,9 +53,5 @@ public class SessionCounter implements HttpSessionListener {
 	
 	public static int getCount(){
 		return activeSessions;
-	}
-	
-	public static void login(){
-		activeSessions++;
 	}
 }

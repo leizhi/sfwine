@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import com.mooo.mycoz.common.StringUtils;
 import com.mooo.mycoz.db.Transaction;
 import com.mooo.mycoz.dbobj.wineBranch.AccessLog;
-import com.mooo.mycoz.dbobj.wineBranch.AddressBook;
 import com.mooo.mycoz.dbobj.wineBranch.GroupMember;
 import com.mooo.mycoz.dbobj.wineBranch.User;
 import com.mooo.mycoz.framework.ActionSession;
@@ -60,7 +59,6 @@ public class LoginAction extends BaseSupport {
 			
 			session.removeAttribute(ValidateCode.RANDOMCODEKEY);
 			session.setAttribute(ValidateCode.RANDOMCODEKEY, randomString);
-			System.out.println(randomString);
 			
 			request.setAttribute("validateCode", tmpFNPrefix);
 		} catch (Exception e) {
@@ -111,13 +109,15 @@ public class LoginAction extends BaseSupport {
 
 				AccessLog al = new AccessLog();
 				if (log.isDebugEnabled()) log.debug("AccessLog: " + IDGenerator.getNextInt(AccessLog.class));
-
-				al.setId(IDGenerator.getNextInt(AccessLog.class));
+				int nextId = IDGenerator.getNextInt(AccessLog.class);
+				al.setId(nextId);
+				al.setSessionId(user.getId());
 				al.setIp(ip);
-				al.setStartdate(new Date(session.getCreationTime()));
+				al.setLoginTime(new Date(session.getCreationTime()));
 				al.add();
 				
-				SessionCounter.login();
+				session.setAttribute(ActionSession.USER_ONLINE_KEY, nextId);
+
 				if (log.isDebugEnabled()) log.debug("SessionCounter: " + SessionCounter.getCount());
 			}
 		} catch (Exception e) {
@@ -171,12 +171,6 @@ public class LoginAction extends BaseSupport {
 		
 			user.add(tx.getConnection());
 			
-			AddressBook addressBook = new AddressBook();
-			addressBook.setId(IDGenerator.getNextInt(AddressBook.class));
-			addressBook.setUserId(user.getId());
-			
-			addressBook.add(tx.getConnection());
-
 			GroupMember groupMember = new GroupMember();
 			groupMember.setId(IDGenerator.getNextInt(GroupMember.class));
 //			groupMember.setGroupId(1);

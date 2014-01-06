@@ -4,34 +4,50 @@ import java.util.Date;
 
 import com.mooo.mycoz.db.DBObject;
 
-public class AccessLog extends DBObject{
+public class AccessLog extends DBObject {
+	private Integer id;
+	private Integer sessionId;
+	private String ip;
+	private Date loginTime;
+	private Date logoutTime;
 
-	Integer id;
-	String ip;
-	Date startdate;
-	Date enddate;
 	public Integer getId() {
-	return id;
+		return id;
 	}
+
 	public void setId(Integer id) {
-	 this.id = id;
+		this.id = id;
 	}
+
+	public Integer getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(Integer sessionId) {
+		this.sessionId = sessionId;
+	}
+
 	public String getIp() {
-	return ip;
+		return ip;
 	}
+
 	public void setIp(String ip) {
-	 this.ip = ip;
+		this.ip = ip;
 	}
-	public Date getStartdate() {
-	return startdate;
+
+	public Date getLoginTime() {
+		return loginTime;
 	}
-	public void setStartdate(Date startdate) {
-	 this.startdate = startdate;
+
+	public void setLoginTime(Date loginTime) {
+		this.loginTime = loginTime;
 	}
-	public Date getEnddate() {
-	return enddate;
+
+	public Date getLogoutTime() {
+		return logoutTime;
 	}
-	public void setEnddate(Date enddate) {
-	 this.enddate = enddate;
+
+	public void setLogoutTime(Date logoutTime) {
+		this.logoutTime = logoutTime;
 	}
 }
