@@ -68,6 +68,11 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 
 			request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId,true));
 
+			User user = new User();
+			user.setBranchId(branchId);
+			user.setActive("Y");
+			request.setAttribute("operators", user.searchAndRetrieveList());
+
 			request.setAttribute("reportName", reportName);
 
 			value="酒厂";
@@ -117,8 +122,9 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			dbobject.setField("card", "processId",0);
 			dbobject.setField("cardJob", "processId",0);
 
-			dbobject.setGreater("jobType", "id",1);
-			dbobject.setNotEqual("jobType", "id",11);
+//			dbobject.setGreater("jobType", "id",1);
+//			dbobject.setNotEqual("jobType", "id",11);
+			dbobject.addCustomWhereClause("(jobType.id=2 OR jobType.id=3)");
 
 			dbobject.setNotEqual("wineJar", "stateId",3);
 			
@@ -135,6 +141,10 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 			value = request.getParameter("wineryId");
 			if(!StringUtils.isNull(value))
 				dbobject.setField("winery", "id", value);
+			
+			value = request.getParameter("userId");
+			if(!StringUtils.isNull(value))
+				dbobject.setField("cardJob", "userId", new Integer(value));
 			
 			String branchCategory = ActionSession.getBranchCategory(request);
 			String wineryValues = ActionSession.getWineryValues(request);
@@ -224,7 +234,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 				cardJob.setJobTypeId(3);
 				cardJob.retrieve();
 				
-				User user = new User();
+				user = new User();
 				user.setId(cardJob.getUserId());
 				user.setBranchId(cardJob.getBranchId());
 				user.retrieve();

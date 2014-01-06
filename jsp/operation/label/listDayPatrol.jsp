@@ -88,11 +88,24 @@
 </tr>
 
 <tr>
+	<td  class="textr"><fmt:message key="OperatorId"/></td>
+	<td><select name="userId">
+			<option selected="selected" value="">All</option>
+			<c:forEach var="item" items="${operators}" varStatus="s">
+				<option value="${item.id}"
+		
+				<c:if test="${item.id==param.userId}">
+					selected="selected"
+				</c:if>
+					>
+				${item.name}
+				</option>
+			--</c:forEach>
+		</select>
+	</td>
+	
 	<td class="textr"><fmt:message key="Date"/></td>
 	<td><input type="text" name="ByDate" value="<fmt:formatDate value="${ByDate }" pattern="yyyy-MM-dd" />" onclick="displayCalendar(this,'yyyy-MM-dd');" size="10"/></td>
-
-	<td class="textr"></td>
-	<td></td>
 </tr>
 
 </tbody>
