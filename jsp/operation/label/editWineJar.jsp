@@ -45,7 +45,7 @@
 <tbody>
 <tr>
 <td class="tl"><fmt:message key="JarNumber"/>:</td>
-<td><input type="text" name="wineJar.jarNumber" value="${wineJar.jarNumber}"  size="4" maxlength="4"/><font class="fm">*</font></td>
+<td><input type="text" name="wineJar.jarNumber" value="${wineJar.jarNumber}"  size="7" maxlength="7"/><font class="fm">*</font></td>
 </tr>
 
 <tr>

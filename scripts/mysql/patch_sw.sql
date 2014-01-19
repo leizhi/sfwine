@@ -849,3 +849,5 @@ update Card set position='右' where position='8';
 update Card set position='中' where position='9';
 
 alter table Card add  `remark` varchar(64) DEFAULT NULL;
+
+alter table WineJar change jarNumber jarNumber varchar(16) DEFAULT NULL;

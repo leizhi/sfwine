@@ -44,12 +44,12 @@
 <tbody>
 <tr>
 <td class="tl"><fmt:message key="Start"/></td>
-<td><input type="text" name="startJarNumber" size="4" maxlength="4"/><font class="fm">*</font></td>
+<td><input type="text" name="startJarNumber" size="6" maxlength="6"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
 <td class="tl"><fmt:message key="End"/></td>
-<td><input type="text" name="endJarNumber" size="4" maxlength="4"/><font class="fm">*</font></td>
+<td><input type="text" name="endJarNumber" size="6" maxlength="6"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
