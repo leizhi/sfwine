@@ -316,7 +316,7 @@ public String promptChange(HttpServletRequest request, HttpServletResponse respo
 		dbobject.setForeignKey("card", "wineJarId", "wineJar", "id");
 		dbobject.setForeignKey("card", "branchId", "wineJar", "branchId");
 		
-		dbobject.setField("cardJob","jobTypeId", 3);
+		dbobject.setNotEqual("cardJob", "jobTypeId", 1);
 		dbobject.setField("cardJob","processId", 0);
 		dbobject.setField("card","wineryId", winery.getId());
 		dbobject.setNotEqual("wineJar", "stateId", 3);
