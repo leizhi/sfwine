@@ -15,4 +15,4 @@ git checkout
 
 git stash
 git pull
-git pop
+git stash pop
