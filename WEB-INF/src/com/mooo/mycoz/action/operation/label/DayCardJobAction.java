@@ -126,7 +126,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 //			dbobject.setNotEqual("jobType", "id",11);
 			dbobject.addCustomWhereClause("(jobType.id=2 OR jobType.id=3)");
 
-			dbobject.setField("wineJar", "stateId",2);
+			dbobject.setNotEqual("wineJar", "stateId",3);
 			
 //			dbobject.addCustomWhereClause("wineJar.stateId<>3");
 			
