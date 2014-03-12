@@ -41,7 +41,8 @@ public class UserAction extends BaseSupport {
 		Vector<String> colName = new Vector<String>();
 		Vector<String> colSum = new Vector<String>();
 		Vector<Integer> colWidth = new Vector<Integer>();
-		
+		Vector<String> colType = new Vector<String>();
+
 		String value = null;
 		Integer branchId = ActionSession.getInteger(request, ActionSession.BRANCH_SESSION_KEY);
 		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
@@ -49,13 +50,13 @@ public class UserAction extends BaseSupport {
 			request.setAttribute("reportName", reportName);
 
 			value="编号";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="名称";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="别名";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="激活";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			
 			request.setAttribute("categorys", ActionSession.getBranchCategoryValues(request));
 			System.out.println("categoryId:"+request.getParameter("categoryId"));
@@ -175,7 +176,7 @@ public class UserAction extends BaseSupport {
 			writer.close();
 			writerStream.close();
 			
-			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "业务报表", colName, colSum, colWidth, "/Reports/Rows");
+			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "业务报表", colName, colSum, colWidth,colType, "/Reports/Rows");
 			writerStream = new FileOutputStream(filePrefix+".jrxml");
 			writer = new BufferedWriter(new OutputStreamWriter(writerStream, "UTF-8")); 
 			writer.write(jrxml.toString());

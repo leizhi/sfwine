@@ -38,21 +38,22 @@ private static Log log = LogFactory.getLog(BranchAction.class);
 		Vector<String> colName = new Vector<String>();
 		Vector<String> colSum = new Vector<String>();
 		Vector<Integer> colWidth = new Vector<Integer>();
-		
+		Vector<String> colType = new Vector<String>();
+
 		String value = null;
 		try {
 			request.setAttribute("reportName", reportName);
 
 			value="编号";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="简称";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="定义";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="地址";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="电话";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 
 			StringBuilder buffer = new StringBuilder();
 			buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -150,7 +151,7 @@ private static Log log = LogFactory.getLog(BranchAction.class);
 			writer.close();
 			writerStream.close();
 			
-			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "业务报表", colName, colSum, colWidth, "/Reports/Rows");
+			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "业务报表", colName, colSum, colWidth,colType, "/Reports/Rows");
 			writerStream = new FileOutputStream(filePrefix+".jrxml");
 			writer = new BufferedWriter(new OutputStreamWriter(writerStream, "UTF-8")); 
 			writer.write(jrxml.toString());

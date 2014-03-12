@@ -59,7 +59,8 @@ private static Log log = LogFactory.getLog(WineJarAction.class);
 		Vector<String> colName = new Vector<String>();
 		Vector<String> colSum = new Vector<String>();
 		Vector<Integer> colWidth = new Vector<Integer>();
-		
+		Vector<String> colType = new Vector<String>();
+
 		String value = null;
 		try {
 			Calendar now = Calendar.getInstance();
@@ -84,27 +85,27 @@ private static Log log = LogFactory.getLog(WineJarAction.class);
 			request.setAttribute("reportName", reportName);
 
 			value="编号";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="酒罐号";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="酒厂";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="容积";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="单位";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="酒类型";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="酒品质";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="酒精度";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="创建日期";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("Date");
 			value="原料";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="监管银行";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			
 			StringBuilder buffer = new StringBuilder();
 			buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -316,7 +317,7 @@ private static Log log = LogFactory.getLog(WineJarAction.class);
 			writer.close();
 			writerStream.close();
 			
-			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "业务报表", colName, colSum, colWidth, "/Reports/Rows");
+			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "业务报表", colName, colSum, colWidth,colType, "/Reports/Rows");
 			writerStream = new FileOutputStream(filePrefix+".jrxml");
 			writer = new BufferedWriter(new OutputStreamWriter(writerStream, "UTF-8"));
 			writer.write(jrxml.toString());

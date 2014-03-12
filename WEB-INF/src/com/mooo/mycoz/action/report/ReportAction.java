@@ -44,6 +44,8 @@ public class ReportAction extends BaseSupport {
 		Vector<String> colName = new Vector<String>();
 		Vector<String> colSum = new Vector<String>();
 		Vector<Integer> colWidth = new Vector<Integer>();
+		Vector<String> colType = new Vector<String>();
+		
 		String value = null;
 		
 		try {
@@ -67,19 +69,19 @@ public class ReportAction extends BaseSupport {
 			request.setAttribute("reportName", reportName);
 
 			value="编号";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="酒厂";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="酒罐总量";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="标签总量";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("Integer");
 			value="巡检记录总数";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("Integer");
 			value="无巡检标签数";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("Integer");
 			value="无巡检酒罐数";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("Integer");
 			
 			StringBuilder buffer = new StringBuilder();
 			buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -218,7 +220,7 @@ public class ReportAction extends BaseSupport {
 			writer.close();
 			writerStream.close();
 			
-			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "业务报表", colName, colSum, colWidth, "/Reports/Rows");
+			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "业务报表", colName, colSum, colWidth,colType, "/Reports/Rows");
 			writerStream = new FileOutputStream(filePrefix+".jrxml");
 			writer = new BufferedWriter(new OutputStreamWriter(writerStream, "UTF-8")); 
 			writer.write(jrxml.toString());

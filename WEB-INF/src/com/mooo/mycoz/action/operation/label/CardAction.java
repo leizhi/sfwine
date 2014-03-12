@@ -53,7 +53,8 @@ private static Log log = LogFactory.getLog(CardAction.class);
 		Vector<String> colName = new Vector<String>();
 		Vector<String> colSum = new Vector<String>();
 		Vector<Integer> colWidth = new Vector<Integer>();
-		
+		Vector<String> colType = new Vector<String>();
+
 		String value = null;
 		try {
 			Calendar now = Calendar.getInstance();
@@ -80,21 +81,21 @@ private static Log log = LogFactory.getLog(CardAction.class);
 			request.setAttribute("reportName", reportName);
 
 			value="酒厂";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="酒罐号";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="状态";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="操作员";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="操作时间";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("Date");
 			value="标识号";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="序列号";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="位置";
-			colName.add(value);colWidth.add(StringUtils.length(value));
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			
 			StringBuilder buffer = new StringBuilder();
 			buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -264,7 +265,7 @@ private static Log log = LogFactory.getLog(CardAction.class);
 			writer.close();
 			writerStream.close();
 			
-			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "标签", colName, colSum, colWidth, "/Reports/Rows");
+			String jrxml = JRUtil.createJRXML(reportName, "源酒产业联盟", "标签", colName, colSum, colWidth,colType, "/Reports/Rows");
 			writerStream = new FileOutputStream(filePrefix+".jrxml");
 			writer = new BufferedWriter(new OutputStreamWriter(writerStream, "UTF-8")); 
 			writer.write(jrxml.toString());

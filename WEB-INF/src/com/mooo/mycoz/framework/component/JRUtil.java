@@ -16,7 +16,7 @@ public class JRUtil {
     /*
      * auto create JRXML
      */
-    public static String createJRXML(String jrName, String title, String title2, Vector<String> colName, Vector<String> colSum, Vector<Integer> colWidth,String xPath){  //something was changed by gchen at 07,07,25
+    public static String createJRXML(String jrName, String title, String title2, Vector<String> colName, Vector<String> colSum, Vector<Integer> colWidth, Vector<String> colType,String xPath){  //something was changed by gchen at 07,07,25
         int startX = 98;
 
     	int pageWidth=595,pageHeight=842;
@@ -36,7 +36,7 @@ public class JRUtil {
         
         if(totalWidth>842){
         	pageWidth=totalWidth+80;
-        	pageHeight=595;
+        	pageHeight=595*100;
         }
         
         startX = (int) Math.ceil((pageWidth-totalWidth)/2);
@@ -58,13 +58,9 @@ public class JRUtil {
 
         for (k=0; k<colName.size(); k++) {
         	buffer.append("	<field name=\"Key" + k + "\"");
-            if (colName.get(k).indexOf("I") > 0) {
-                buffer.append(" class=\"java.lang.Integer\"");
-            } else if (colName.get(k).indexOf("R") > 0) {
-                    buffer.append(" class=\"java.lang.Double\"");
-            } else {
-                buffer.append(" class=\"java.lang.String\"");
-            }
+        	
+            buffer.append(" class=\"java.lang."+colType.get(k)+"\"");
+            
             buffer.append(">\n");
             buffer.append("		<fieldDescription><![CDATA[Key"+k+"]]></fieldDescription>\n");
             buffer.append("	</field>\n");
