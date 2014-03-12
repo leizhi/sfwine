@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -124,6 +125,7 @@ public class JRExport {
 			params.put(JRXPathQueryExecuterFactory.XML_NUMBER_PATTERN, "#,##0.##");
 			//params.put(JRXPathQueryExecuterFactory.XML_LOCALE, Locale.ENGLISH);
 			//params.put(JRParameter.REPORT_LOCALE, Locale.US);
+			params.put(JRParameter.IS_IGNORE_PAGINATION, Boolean.TRUE);
 
 			JasperFillManager.fillReportToFile(jasperFile,jrprintFile,params);
 		}catch (JRException e){
@@ -194,7 +196,8 @@ public class JRExport {
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, baos);
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, destFile.toString());
-			
+
+			//exporter.setParameter(JRXlsExporterParameter.MAXIMUM_ROWS_PER_SHEET, 60000);
 			exporter.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.TRUE);
 			exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS,Boolean.TRUE);
 			exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);

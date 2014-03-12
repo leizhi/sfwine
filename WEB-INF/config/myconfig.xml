@@ -383,8 +383,8 @@
 		<action	name="Card" default="listCard"
 			class="com.mooo.mycoz.action.operation.label.CardAction">
 			<result name="listCard">/jsp/operation/label/listCard.jsp</result>
-			<result name="exportCard">/jsp/incl/download.jsp</result>
-			<result name="printCard">/jsp/incl/download.jsp</result>
+			<result name="exportCard"></result>
+			<result name="printCard"></result>
 			<result name="promptAdd">/jsp/operation/label/addCard.jsp</result>
 			<result name="processAdd"></result>
 			<result name="processDelete"></result>
@@ -401,8 +401,8 @@
 		<action	name="CardJob" default="patrol"
 			class="com.mooo.mycoz.action.operation.label.CardJobAction">
 			<result name="listCardJob">/jsp/operation/label/listCardJob.jsp</result>
-			<result name="exportCardJob">/jsp/incl/download.jsp</result>
-			<result name="printCardJob">/jsp/incl/download.jsp</result>
+			<result name="exportCardJob"></result>
+			<result name="printCardJob"></result>
 			<result name="wineryCardJob">/jsp/operation/label/wineryCardJob.jsp</result>
 			<result name="promptChange">/jsp/operation/label/changeCard.jsp</result>
 			<result name="processChange"></result>
@@ -412,8 +412,8 @@
 		<action	name="DayCardJob" default="dayPatrol"
 			class="com.mooo.mycoz.action.operation.label.DayCardJobAction">
 			<result name="listDayPatrol">/jsp/operation/label/listDayPatrol.jsp</result>
-			<result name="exportDayPatrol">/jsp/incl/download.jsp</result>
-			<result name="printDayPatrol">/jsp/incl/download.jsp</result>
+			<result name="exportDayPatrol"></result>
+			<result name="printDayPatrol"></result>
 			<result name="listDayCardJob">/jsp/operation/label/listDayCardJob.jsp</result>
 			<result name="processCanceled"></result>
 		</action>
@@ -436,8 +436,8 @@
 			<result name="processItemAdd"></result>
 			<result name="processItemDelete"></result>
 			<result name="processDelete"></result>
-			<result name="print">/jsp/incl/download.jsp</result>
-			<result name="export">/jsp/incl/download.jsp</result>
+			<result name="print"></result>
+			<result name="export"></result>
 		</action>
 
 		<action	name="Sale" default="list"

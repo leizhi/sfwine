@@ -89,7 +89,7 @@ private static Log log = LogFactory.getLog(CardAction.class);
 			value="操作员";
 			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="操作时间";
-			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("Date");
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="标识号";
 			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="序列号";

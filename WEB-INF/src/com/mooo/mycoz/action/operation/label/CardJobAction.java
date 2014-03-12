@@ -90,7 +90,7 @@ public String listCardJob(HttpServletRequest request, HttpServletResponse respon
 			value="操作员";
 			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="业务时间";
-			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("Date");
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			
 			StringBuilder buffer = new StringBuilder();
 			buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");

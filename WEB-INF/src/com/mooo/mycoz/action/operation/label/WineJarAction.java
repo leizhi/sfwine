@@ -101,7 +101,7 @@ private static Log log = LogFactory.getLog(WineJarAction.class);
 			value="酒精度";
 			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="创建日期";
-			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("Date");
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="原料";
 			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="监管银行";
