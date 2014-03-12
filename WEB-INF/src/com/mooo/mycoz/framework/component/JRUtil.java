@@ -36,7 +36,7 @@ public class JRUtil {
         
         if(totalWidth>842){
         	pageWidth=totalWidth+80;
-        	pageHeight=595*100;
+        	pageHeight=595*10000;
         }
         
         startX = (int) Math.ceil((pageWidth-totalWidth)/2);
