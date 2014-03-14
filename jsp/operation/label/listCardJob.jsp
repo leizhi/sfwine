@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/jsp/incl/static.inc"%>
 <fmt:bundle basename="MessageBundle">
@@ -83,15 +83,15 @@
 		<input type="text" name="wineJar" value="${param.wineJar }"/>
 		<img src="jsp/images/miniSearch.gif" border=0 alt="<fmt:message key="choosedate"/>" onclick="openLookup('jsp/lookup/wineJarLookup.jsp?wineryId=${param.wineryId}','forms[0].wineJar');return false;">
 	</td>
-</tr>
-
-<tr>
+	
 	<td  class="textr"><fmt:message key="Rfidcode"/></td>
 	<td>
 		<input type="text" name="rfidCode" value="${param.rfidCode }"/>
 		<img src="jsp/images/miniSearch.gif" border=0 alt="<fmt:message key="choosedate"/>" onclick="openLookup('jsp/lookup/allCardLookup.jsp?wineryId=${param.wineryId}','forms[0].rfidCode');return false;">
 	</td>
-	
+</tr>
+
+<tr>
 	<td class="textr"><fmt:message key="State"/></td>
 	<td>
 	<select name="stateId" onchange="document.forms[0].submit();">
@@ -108,11 +108,6 @@
 		 	--</c:forEach>
 	</select>
 	</td>
-</tr>
-
-<tr>
-	<td  class="textr"></td>
-	<td></td>
 	
 	<td  class="textr"><fmt:message key="JobType"/></td>
 	<td><select name="jobTypeId" onchange="document.forms[0].submit();">
@@ -133,10 +128,10 @@
 
 <tr>
 	<td class="textr"><fmt:message key="StartDate"/></td>
-	<td><input type="text" name="StartDate" value="${StartDate }" onclick="displayCalendar(this,'yyyy-MM-dd hh:mm:ss');"/></td>
+	<td><input type="text" name="StartDate" value="${StartDate }" size="18" onclick="displayCalendar(this,'yyyy-MM-dd hh:mm:ss');"/></td>
 
 	<td class="textr"><fmt:message key="EndDate"/></td>
-	<td><input type="text" name="EndDate" value="${EndDate }" onclick="displayCalendar(this,'yyyy-MM-dd hh:mm:ss');"/></td>
+	<td><input type="text" name="EndDate" value="${EndDate }" size="18" onclick="displayCalendar(this,'yyyy-MM-dd hh:mm:ss');"/></td>
 </tr>
 
 </tbody>

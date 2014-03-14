@@ -59,7 +59,7 @@ public String listCardJob(HttpServletRequest request, HttpServletResponse respon
 			String startDate = request.getParameter("StartDate");
 			if(startDate==null){
 				now.add(Calendar.YEAR, -1);
-				startDate = CalendarUtils.dformat(now.getTime());
+				startDate = CalendarUtils.dtformat(now.getTime());
 			}
 			request.setAttribute("StartDate", startDate);
 			
@@ -67,7 +67,7 @@ public String listCardJob(HttpServletRequest request, HttpServletResponse respon
 			if(endDate==null){
 				now.add(Calendar.YEAR, 1);
 				now.add(Calendar.DAY_OF_MONTH, 1);
-				endDate = CalendarUtils.dformat(now.getTime());
+				endDate = CalendarUtils.dtformat(now.getTime());
 			}
 			request.setAttribute("EndDate", endDate);
 			
@@ -182,8 +182,10 @@ public String listCardJob(HttpServletRequest request, HttpServletResponse respon
 			dbobject.setRetrieveField("jobState", "fullName");
 			dbobject.setRetrieveField("wineJar", "jarNumber");
 			
-			dbobject.setOrderBy("cardJob", "id","DESC");
-			
+			dbobject.setOrderBy("winery", "id");
+			dbobject.setOrderBy("card", "id");
+			dbobject.setOrderBy("cardJob", "jobDate","DESC");
+
 			Page page = new Page();
 			page.buildComponent(request, dbobject.count());
 			
