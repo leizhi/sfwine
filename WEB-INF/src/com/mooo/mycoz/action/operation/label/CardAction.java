@@ -82,8 +82,6 @@ private static Log log = LogFactory.getLog(CardAction.class);
 
 			value="酒厂";
 			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
-			value="酒罐号";
-			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="状态";
 			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="操作员";
@@ -95,6 +93,8 @@ private static Log log = LogFactory.getLog(CardAction.class);
 			value="序列号";
 			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			value="位置";
+			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
+			value="备注";
 			colName.add(value);colWidth.add(StringUtils.length(value));colType.add("String");
 			
 			StringBuilder buffer = new StringBuilder();
@@ -190,61 +190,63 @@ private static Log log = LogFactory.getLog(CardAction.class);
 				Winery winery = (Winery)rowm.get("winery");
 				Card card = (Card)rowm.get("card");
 				User user = (User)rowm.get("user");
+				CardJob cardJob = (CardJob)rowm.get("cardJob");
+				CardType cardType = (CardType)rowm.get("cardType");
+				JobType jobType = (JobType)rowm.get("jobType");
 
 				//column start
 				value=winery.getEnterpriseName();
-				if(value.length()>colWidth.get(0)){
+				if(value !=null && value.length()>colWidth.get(0)){
 					colWidth.set(0, StringUtils.length(value));
 				}
 				buffer.append("<Key0>"+value+"</Key0>\n");
 
 				//column start
-				if(value.length()>colWidth.get(1)){
+				value=jobType.getDefinition();
+				if(value !=null && value.length()>colWidth.get(1)){
 					colWidth.set(1, StringUtils.length(value));
 				}
 				buffer.append("<Key1>"+value+"</Key1>\n");
 				
 				//column start
-				if(value.length()>colWidth.get(2)){
+				value=user.getName();
+				if(value !=null && value.length()>colWidth.get(2)){
 					colWidth.set(2, StringUtils.length(value));
 				}
 				buffer.append("<Key2>"+value+"</Key2>\n");
 				
 				//column start
-				value=user.getName();
-				if(value.length()>colWidth.get(3)){
+				value=CalendarUtils.dtformat(cardJob.getJobDate());
+				if(value !=null && value.length()>colWidth.get(3)){
 					colWidth.set(3, StringUtils.length(value));
 				}
 				buffer.append("<Key3>"+value+"</Key3>\n");
 				
 				//column start
-				if(value.length()>colWidth.get(4)){
+				value=cardType.getCardTypeName();
+				if(value !=null && value.length()>colWidth.get(4)){
 					colWidth.set(4, StringUtils.length(value));
 				}
 				buffer.append("<Key4>"+value+"</Key4>\n");
 				
 				//column start
 				value=card.getRfidcode();
-				if(value.length()>colWidth.get(5)){
+				if(value !=null && value.length()>colWidth.get(5)){
 					colWidth.set(5, StringUtils.length(value));
 				}
 				
 				buffer.append("<Key5>"+value+"</Key5>\n");
 				
 				//column start
-				value=card.getUuid();
-				if(value.length()>colWidth.get(6)){
+				value=card.getPosition();
+				if(value !=null && value.length()>colWidth.get(6)){
 					colWidth.set(6, StringUtils.length(value));
 				}
 				buffer.append("<Key6>"+value+"</Key6>\n");
 				
 				//column start
-				value=card.getPosition()+"";
-				if(card.getPosition()==null){
-					value="";
-				}
-				
-				if(value.length()>colWidth.get(7)){
+				value=card.getRemark();
+				if(value !=null && value.length()>colWidth.get(7)){
 					colWidth.set(7, StringUtils.length(value));
 				}
 				buffer.append("<Key7>"+value+"</Key7>\n");
