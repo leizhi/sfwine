@@ -139,11 +139,25 @@ public class ZxingTest {
 				"TITLE:主任\n"+
 				"URL:www.scy9.com\n"+
 				"END:VCARD";
+		
+		contents="BEGIN:VCARD\n"+
+				"VERSION:3.0\n"+
+				"N:魏川翔\n"+
+				"EMAIL:weichuanxiang@y9jy.com\n"+
+				"TEL;TYPE=VOICE,MSG,WORK:028-85936632\n"+
+				"TEL;TYPE=FAX,WORK:028-85936632\n"+
+				"TEL;CELL:13308081698\n"+
+				"TEL;CELL:18623458366\n"+
+				"ADR:四川源酒投资咨询有限公司\n"+
+				"ORG:四川源酒网络科技有限公司\n"+
+				"TITLE:副总经理\n"+
+				"URL:www.y9jy.com\n"+
+				"END:VCARD";
 			try {
 				ZxingTest handler = new ZxingTest();
 //				String buf = new String(contents.getBytes("UTF-8"),"ISO-8859-1");
 //				String buf = contents;
-				handler.codingQRCode(contents, width, height, "/home/zlei/hday1.png");
+				handler.codingQRCode(contents, width, height, "/home/zlei/wcx.png");
 				if(log.isDebugEnabled())log.debug(contents);
 				
 			} catch (Exception e) {

@@ -58,7 +58,7 @@ public String listCardJob(HttpServletRequest request, HttpServletResponse respon
 			
 			String startDate = request.getParameter("StartDate");
 			if(startDate==null){
-				now.add(Calendar.YEAR, -1);
+				now.add(Calendar.MONTH, -1);
 				startDate = CalendarUtils.dtformat(now.getTime());
 			}
 			request.setAttribute("StartDate", startDate);
