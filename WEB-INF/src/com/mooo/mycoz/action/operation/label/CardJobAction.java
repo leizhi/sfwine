@@ -65,8 +65,9 @@ public String listCardJob(HttpServletRequest request, HttpServletResponse respon
 			
 			String endDate = request.getParameter("EndDate");
 			if(endDate==null){
-				now.add(Calendar.YEAR, 1);
-				now.add(Calendar.DAY_OF_MONTH, 1);
+//				now.add(Calendar.YEAR, 1);
+//				now.add(Calendar.DAY_OF_MONTH, 1);
+				now.add(Calendar.MONTH, 1);
 				endDate = CalendarUtils.dtformat(now.getTime());
 			}
 			request.setAttribute("EndDate", endDate);

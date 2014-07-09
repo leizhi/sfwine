@@ -14,7 +14,10 @@ import java.util.TimeZone;
 import java.util.UUID;
 
 import com.mooo.mycoz.db.DbBridgingBean;
+import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.pool.DbConnectionManager;
+import com.mooo.mycoz.dbobj.wineBranch.Card;
+import com.mooo.mycoz.dbobj.wineBranch.CardJob;
 import com.mooo.mycoz.dbobj.wineShared.Branch;
 
 public class Test {
@@ -45,7 +48,7 @@ public class Test {
 		
 		
 		Test t = new Test();
-		t.dbTools();
+		t.db();
 		
 	}
 
@@ -183,14 +186,14 @@ public class Test {
 	}
 	
 	public void db(){
-		String[] ids = TimeZone.getAvailableIDs();
-
-		for(int i=0;i<ids.length;i++){
-			System.out.println(ids[i]);
-
-		}
-		
-		System.out.println(TimeZone.getDefault().getID());
+//		String[] ids = TimeZone.getAvailableIDs();
+//
+//		for(int i=0;i<ids.length;i++){
+//			System.out.println(ids[i]);
+//
+//		}
+//		
+//		System.out.println(TimeZone.getDefault().getID());
 
 //		"Asia/Chongqing"
 		
@@ -209,6 +212,25 @@ public class Test {
 			for(Object bean:retrieveList){
 				branch = (Branch)bean;
 				System.out.println(branch.getDefinition());
+			}
+			
+			MultiDBObject dbobject = new MultiDBObject();
+			
+			dbobject.addTable(CardJob.class, "cardJob");
+			dbobject.addTable(Card.class, "card");
+
+			dbobject.setForeignKey("cardJob", "cardId", "card", "id");
+			
+			dbobject.setRetrieveField("card", "id");
+			dbobject.setRecord(0, 5);
+//			System.out.println(dbobject.searchSQL());
+			
+			List<Object> list = dbobject.searchAndRetrieveList();
+			System.out.println("laaaaist:");
+
+			System.out.println("list:"+list.size());
+			for(Object obj:list){
+				System.out.println(obj);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

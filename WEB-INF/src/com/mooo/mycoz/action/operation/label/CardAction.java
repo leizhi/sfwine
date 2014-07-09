@@ -216,7 +216,11 @@ private static Log log = LogFactory.getLog(CardAction.class);
 				buffer.append("<Key2>"+value+"</Key2>\n");
 				
 				//column start
-				value=CalendarUtils.dtformat(cardJob.getJobDate());
+				value="";
+				
+				if(cardJob.getJobDate()!=null)
+					value=CalendarUtils.dtformat(cardJob.getJobDate());
+				
 				if(value !=null && value.length()>colWidth.get(3)){
 					colWidth.set(3, StringUtils.length(value));
 				}
