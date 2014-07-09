@@ -72,12 +72,14 @@
 		<option value="J4">J4</option>
 		<option value="J5">J5</option>
 		<option value="J6">J6</option>
+        <option value="J7">J7</option>
 		<option value="C1">C1</option>
 		<option value="C2">C2</option>
 		<option value="C3">C3</option>
 		<option value="C4">C4</option>
 		<option value="C5">C5</option>
 		<option value="C6">C6</option>
+        <option value="C7">C7</option>
 	</select>
 </td>
 

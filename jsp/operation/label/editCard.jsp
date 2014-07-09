@@ -75,12 +75,14 @@
 		<option value="J4" <c:if test="${card.position=='J4'}">selected="selected"</c:if>>J4</option>
 		<option value="J5" <c:if test="${card.position=='J5'}">selected="selected"</c:if>>J5</option>
 		<option value="J6" <c:if test="${card.position=='J6'}">selected="selected"</c:if>>J6</option>
+        <option value="J7" <c:if test="${card.position=='J7'}">selected="selected"</c:if>>J7</option>
 		<option value="C1" <c:if test="${card.position=='C1'}">selected="selected"</c:if>>C1</option>
 		<option value="C2" <c:if test="${card.position=='C2'}">selected="selected"</c:if>>C2</option>
 		<option value="C3" <c:if test="${card.position=='C3'}">selected="selected"</c:if>>C3</option>
 		<option value="C4" <c:if test="${card.position=='C4'}">selected="selected"</c:if>>C4</option>
 		<option value="C5" <c:if test="${card.position=='C5'}">selected="selected"</c:if>>C5</option>
 		<option value="C6" <c:if test="${card.position=='C6'}">selected="selected"</c:if>>C6</option>
+        <option value="C7" <c:if test="${card.position=='C7'}">selected="selected"</c:if>>C7</option>
 	</select>
 </td>
 </tr>
