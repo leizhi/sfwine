@@ -299,6 +299,11 @@ private static Log log = LogFactory.getLog(CardAction.class);
 		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 
 		request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId));
+		
+		CardJob cardJob = new CardJob();
+		cardJob.setJobDate(new Date());
+		request.setAttribute("cardJob", cardJob);
+
 		return "success";
 	}
 	
@@ -312,33 +317,41 @@ private static Log log = LogFactory.getLog(CardAction.class);
 			
 			Card card = new Card();
 			ParamUtil.bindData(request, card,"card");
-			
+			request.setAttribute("card", card);
+
 			int cardId = IDGenerator.getNextID(tx.getConnection(),Card.class);
 			card.setId(cardId);
 			card.setBranchId(branchId);
+			card.setProcessId(0);
+			card.setCardTypeId(1);
 			card.add(tx.getConnection());
-			
+
+
 			CardJob cardJob = new CardJob();
 			ParamUtil.bindData(request, cardJob,"cardJob");
+
 			cardJob.setCardId(cardId);
-			
+
 			cardJob.setId(IDGenerator.getNextID(tx.getConnection(),CardJob.class));
 			cardJob.setBranchId(branchId);
 			cardJob.setUserId(sessionId);
 			cardJob.setProcessId(0);
+			cardJob.setJobTypeId(1);
+			cardJob.setSpotNormal("Y");
+			cardJob.setCardNormal("Y");
 			cardJob.add(tx.getConnection());
 
 			tx.commit();
+
+			request.setAttribute("message", "processAdd:"+card.getRfidcode());
 		} catch (Exception e) {
 			tx.rollback();
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
-			
-			return "promptAdd";
 		} finally {
 			tx.end();
 		}
-		return "listCard";
+		return "promptAdd";
 	}
 	
 	public String processDelete(HttpServletRequest request, HttpServletResponse response) {
