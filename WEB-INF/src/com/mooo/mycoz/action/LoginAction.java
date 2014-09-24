@@ -77,8 +77,9 @@ public class LoginAction extends BaseSupport {
 			StringUtils.noNull(user.getName());
 			StringUtils.noNull(user.getPassword());
 
-			user.setName(user.getName().replaceAll("''",""));
-
+			user.setName(user.getName().replaceAll("'",""));
+			user.setName(user.getName().replaceAll(" ",""));
+			
 			HttpSession session = request.getSession(true);
 			
 			String svc = (String)session.getAttribute(ValidateCode.RANDOMCODEKEY);
