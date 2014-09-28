@@ -6,7 +6,7 @@ directory with the processing instruction <?eclipse.ant.import?>
 as the first entry and export the buildfile again. -->
 
 <!-- name:对应工程的名字；default:需要的缺省任务(运行"ant"不指明任务时执行的任务) -->
-<project name="littleface" default="build" basedir=".">
+<project name="sfwine" default="build" basedir=".">
 <!-- 建立目录结构
 project
 ... src JAVA 源码编辑目录
