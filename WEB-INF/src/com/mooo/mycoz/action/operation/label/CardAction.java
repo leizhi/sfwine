@@ -596,15 +596,22 @@ public String processActivate(HttpServletRequest request, HttpServletResponse re
 			wineJar.setWineryId(winery.getId());
 			wineJar.retrieve(tx.getConnection());
 			
+			Card checkCard = new Card();
+			checkCard.setWineJarId(wineJar.getId());
+			checkCard.setProcessId(0);
+			
 			Card card = new Card();
 			
 			value = request.getParameter("cardId"+i);
-			
 			card.setId(new Integer(value));
+			card.retrieve(tx.getConnection());
 			
+			if(checkCard.count(tx.getConnection())>0){
+				checkCard.retrieve(tx.getConnection());
+				throw new Exception("不能激活:"+card.getRfidcode()+" 到酒罐号: "+wineJar.getJarNumber() +" 请更换标签:"+checkCard.getRfidcode()+" 为 "+card.getRfidcode());
+			}
 			
 			card.setWineJarId(wineJar.getId());
-			
 			value = request.getParameter("cardPosition"+i);
 			
 			card.setPosition(value);
