@@ -371,10 +371,13 @@ public String processChange(HttpServletRequest request, HttpServletResponse resp
 			Card oldCard = new Card();
 			oldCard.setId(new Integer(cardId));
 			oldCard.retrieve(tx.getConnection());
+			
 			//update card
 			Card changeCard = new Card();
 			changeCard.setWineJarId(oldCard.getWineJarId());
 			changeCard.setBranchId(oldCard.getBranchId());
+			changeCard.setPosition(oldCard.getPosition());
+			
 			int processId = changeCard.count(tx.getConnection());
 			changeCard.setProcessId(0);
 			changeCard.retrieve(tx.getConnection());
