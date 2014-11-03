@@ -596,12 +596,13 @@ public String processActivate(HttpServletRequest request, HttpServletResponse re
 			wineJar.setWineryId(winery.getId());
 			wineJar.retrieve(tx.getConnection());
 			
+			value = request.getParameter("cardPosition"+i);
 			Card checkCard = new Card();
 			checkCard.setWineJarId(wineJar.getId());
 			checkCard.setProcessId(0);
-			
+			checkCard.setPosition(value);
+
 			Card card = new Card();
-			
 			value = request.getParameter("cardId"+i);
 			card.setId(new Integer(value));
 			card.retrieve(tx.getConnection());
