@@ -184,6 +184,7 @@ public String listCardJob(HttpServletRequest request, HttpServletResponse respon
 			dbobject.setRetrieveField("wineJar", "jarNumber");
 			
 			dbobject.setOrderBy("winery", "id");
+			dbobject.setOrderBy("wineJar", "id");
 			dbobject.setOrderBy("card", "id");
 			dbobject.setOrderBy("cardJob", "jobDate","DESC");
 

@@ -851,3 +851,30 @@ update Card set position='中' where position='9';
 alter table Card add  `remark` varchar(64) DEFAULT NULL;
 
 alter table WineJar change jarNumber jarNumber varchar(16) DEFAULT NULL;
+
+update Card a INNER JOIN(SELECT Id,wineryId from card2 WHERE card.branchId=4 ) b ON a.Id=b.Id set a.wineryId=b.wineryId;
+
+update CardJob a INNER JOIN(select DATE_FORMAT(jobDate,'%Y-%m-%d') day,cardId,processId,id from CardJob where jobDate like '2014-12-29%' group by day,cardId order by jobDate desc) b ON a.id=b.id set a.processId=0;
+
+update CardJob a INNER JOIN(select DATE_FORMAT(jobDate,'%Y-%m-%d') day,cardId,processId,id from CardJob where jobDate like '2014-12-29%' group by day,cardId) b ON a.id=b.id set a.processId=-1;
+
+select a.id,a.rfidcode,a.processId from Card a INNER JOIN(select DATE_FORMAT(jobDate,'%Y-%m-%d') day,cardId,processId,id from CardJob where jobDate like '2014-12-29%' group by day,cardId ) b ON a.id=b.cardId;
+
+update Card a INNER JOIN(select DATE_FORMAT(jobDate,'%Y-%m-%d') day,cardId,processId,id from CardJob where jobDate like '2014-12-29%' group by day,cardId) b ON a.id=b.cardId set a.processId=0;
+
+update CardJob a INNER JOIN(select id from CardJob where jobDate > '2014-12-30') b ON a.id=b.id set a.jobDate='2014-12-29 '+DATE_FORMAT(jobDate,'%H:%i:%S');
+
+update CardJob a INNER JOIN(select cardId,count(id) gs from CardJob  group by cardId  HAVING count(id)>2) b ON a.cardId=b.cardId set a.processId=2 where a.jobTypeId=2;
+
+update CardJob a INNER JOIN(select min(id) id from CardJob where processId=0  group by cardId  HAVING count(id)>1) b ON a.id=b.id set a.processId=-1;
+update CardJob c INNER JOIN( select a.cardId,count(a.id) ct from CardJob a  where a.cardId IN (select cardId from CardJob where processId=-1) group by a.cardId) b ON c.cardId=b.cardId set c.processId=b.ct-2 where c.processId=-1;
+
+
+update Card a INNER JOIN(select id,wineJarId from card2) b ON a.id=b.id set a.wineJarId=b.wineJarId;
+
+
+select a.id,a.rfidcode,a.processId from Card a INNER JOIN(select DATE_FORMAT(jobDate,'%Y-%m-%d') day,cardId,processId,id from CardJob where jobDate like '2015-01-14%'  group by day,cardId ) b ON a.id=b.cardId where a.branchId=53;
+
+select a.id,a.rfidcode,a.position,a.processId,w.enterpriseName from Card a INNER JOIN(select DATE_FORMAT(jobDate,'%Y-%m-%d') day,cardId,processId,id from CardJob where jobDate like '2015-01-14%'  group by day,cardId ) b ON a.id=b.cardId,Winery w where a.branchId=4 and a.wineryId=w.id;
+
+select a.id,a.rfidcode,a.processId,w.enterpriseName,j.jarNumber,a.position from Card a INNER JOIN(select DATE_FORMAT(jobDate,'%Y-%m-%d') day,cardId,processId,id from CardJob where jobDate like '2015-01-14%'  group by day,cardId ) b ON a.id=b.cardId,Winery w,WineJar j where a.branchId=4 and a.wineryId=w.id and a.wineJarId=j.id;

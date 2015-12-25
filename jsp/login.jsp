@@ -264,7 +264,7 @@ function mem_check() {
 	<c:param name="method">promptRegister</c:param>
 </c:url>
 
-<c:url value="/ForgeryCode.do" var="checkFC">
+<c:url value="/Sale.do" var="checkFC">
 	<c:param name="method">check</c:param>
 </c:url>
 

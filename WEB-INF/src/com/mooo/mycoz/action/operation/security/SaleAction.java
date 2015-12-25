@@ -156,13 +156,13 @@ private static Log log = LogFactory.getLog(SaleAction.class);
 				winery.setId(product.getEnterpriseId());
 				winery.retrieve();
 				
-				int width=150, height=150;
+				int width=300, height=300;
 				
 				String contents ="";
 				contents = winery.getEnterpriseName1()+"."+product.getProductName()+"\n";
 				contents += "专家酒体评分:"+sampleProduct.getExpertScore()+"分"+"\n";
 				contents += "售价:"+saleItem.getSalePrice()+"元/瓶 (2013)"+"\n";
-				contents += "http://86999.org/Sale.do?method=check&FC="+saleJob.getSaleCode();
+				contents += "http://192.168.1.104:8080/sfwine/Sale.do?method=check&FC="+saleJob.getSaleCode();
 				
 				System.out.println("http://localhost:8080/sfwine/Sale.do?method=check&FC="+saleJob.getSaleCode());
 				

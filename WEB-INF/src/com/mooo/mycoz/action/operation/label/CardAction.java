@@ -460,6 +460,10 @@ private static Log log = LogFactory.getLog(CardAction.class);
 			ParamUtil.bindData(request, card,"card");
 			card.setBranchId(branchId);
 
+			if(card.getId()==null){
+				throw new Exception("修改异常");
+			}
+			
 			card.update(tx.getConnection());
 			tx.commit();
 		} catch (Exception e) {
@@ -530,6 +534,8 @@ public String promptActivate(HttpServletRequest request, HttpServletResponse res
 	Integer branchId = ActionSession.getInteger(request, ActionSession.BRANCH_SESSION_KEY);
 	String wineryName = request.getParameter("winery");
 	try {
+			StringUtils.noNull(wineryName);
+		
 			Winery winery = new Winery();
 			winery.setEnterpriseName(wineryName);
 			winery.retrieve();
@@ -616,6 +622,10 @@ public String processActivate(HttpServletRequest request, HttpServletResponse re
 			value = request.getParameter("cardPosition"+i);
 			
 			card.setPosition(value);
+			
+			if(card.getId()==null || card.getPosition()==null || card.getWineJarId()==null){
+				throw new Exception("不能激活");
+			}
 			
 			card.update(tx.getConnection());
 
