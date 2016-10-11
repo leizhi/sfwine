@@ -61,7 +61,7 @@ public class Test {
         //数组长度  
         int count = list.length;  
         //结果集  
-        int[] resultList = new int[count];  
+        int[] resultList = new int[count]; 
         //用一个LinkedList作为中介  
         LinkedList<Integer> temp = new LinkedList<Integer>();  
         //初始化temp  
